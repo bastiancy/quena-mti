@@ -1,0 +1,1066 @@
+swagger: "2.0"
+info:
+  description: |
+    Tienda online para venta de instrumentos musicales,  
+    para la tarea del MTI
+  version: "0.1.0"
+  title: Quena Store
+  contact:
+    name: bastian.carvajal@sansano.usm.cl
+host: localhost:8080
+basePath: /
+schemes:
+  - http
+paths:
+
+  /productos:
+    x-swagger-router-controller: productos
+    get:
+      operationId: findAllProducto
+      summary: Lista todos los productos
+      description: Devuelve listado de Producto
+      produces:
+        - application/json
+        - application/xml
+        - text/html
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Producto"
+    post:
+      operationId: addProducto
+      summary: Crea un nuevo Producto
+      description: Crea un Producto al completar a traves de un formulario / json, devuelve el Producto
+      consumes:
+        - application/json
+      produces:
+        - application/json
+        - application/xml
+        - text/html
+      parameters:
+        - in: body
+          name: body
+          description: Producto object para agregar
+          required: true
+          schema:
+            $ref: "#/definitions/Producto"
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: "#/definitions/Producto"
+        "405":
+          description: Validation exception
+
+  /productos/{productoId}:
+    x-swagger-router-controller: productos
+    get:
+      operationId: findOneProducto
+      summary: Detalles de un producto
+      description: Devuelve un Producto por su ID
+      produces:
+        - application/json
+        - application/xml
+        - text/html
+      parameters:
+        - in: path
+          name: productoId
+          description: Producto ID
+          required: true
+          type: string
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Producto'
+        "404":
+          description: Object not found
+    put:
+      operationId: updateProducto
+      summary: Actualiza un Producto
+      description: Actualiza un Producto a traves de un formulario / json, devuelve el Producto
+      consumes:
+        - application/json
+      produces:
+        - application/json
+        - application/xml
+        - text/html
+      parameters:
+        - in: path
+          name: productoId
+          description: Producto ID
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Producto object para agregar
+          required: false
+          schema:
+            $ref: "#/definitions/Producto"
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: "#/definitions/Producto"
+        "405":
+          description: Validation exception
+        "404":
+          description: Producto not found
+        "400":
+          description: Invalid ID supplied
+    delete:
+      operationId: removeProducto
+      summary: Elimina un Producto
+      description: Elimina un Producto por ID
+      produces:
+        - application/json
+        - application/xml
+        - text/html
+      parameters:
+        - in: path
+          name: productoId
+          description: Producto ID
+          required: true
+          type: string
+      responses:
+        "200":
+          description: successful operation
+        "404":
+          description: Producto not found
+        "400":
+          description: Invalid ID supplied
+
+  /categorias:
+    x-swagger-router-controller: categorias
+    get:
+      operationId: findAllCategoria
+      summary: Lista todos los categorias
+      description: Devuelve listado de Categoria
+      produces:
+        - application/json
+        - application/xml
+        - text/html
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Categoria"
+    post:
+      operationId: addCategoria
+      summary: Crea un nuevo Categoria
+      description: Crea un Categoria al completar a traves de un formulario / json, devuelve el Categoria
+      consumes:
+        - application/json
+      produces:
+        - application/json
+        - application/xml
+        - text/html
+      parameters:
+        - in: body
+          name: body
+          description: Categoria object para agregar
+          required: true
+          schema:
+            $ref: "#/definitions/Categoria"
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: "#/definitions/Categoria"
+        "405":
+          description: Validation exception
+
+  /categorias/{categoriaId}:
+    x-swagger-router-controller: categorias
+    get:
+      operationId: findOneCategoria
+      summary: Detalles de un categoria
+      description: Devuelve un Categoria por su ID
+      produces:
+        - application/json
+        - application/xml
+        - text/html
+      parameters:
+        - in: path
+          name: categoriaId
+          description: Categoria ID
+          required: true
+          type: string
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Categoria'
+        "404":
+          description: Object not found
+    put:
+      operationId: updateCategoria
+      summary: Actualiza un Categoria
+      description: Actualiza un Categoria a traves de un formulario / json, devuelve el Categoria
+      consumes:
+        - application/json
+      produces:
+        - application/json
+        - application/xml
+        - text/html
+      parameters:
+        - in: path
+          name: categoriaId
+          description: Categoria ID
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Categoria object para agregar
+          required: false
+          schema:
+            $ref: "#/definitions/Categoria"
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: "#/definitions/Categoria"
+        "405":
+          description: Validation exception
+        "404":
+          description: Producto not found
+        "400":
+          description: Invalid ID supplied
+    delete:
+      operationId: removeCategoria
+      summary: Elimina un Categoria
+      description: Elimina un Categoria por ID
+      produces:
+        - application/json
+        - application/xml
+        - text/html
+      parameters:
+        - in: path
+          name: categoriaId
+          description: Categoria ID
+          required: true
+          type: "number"
+          format: "int64"
+      responses:
+        "200":
+          description: successful operation
+        "404":
+          description: Categoria not found
+        "400":
+          description: Invalid ID supplied
+
+  /stores:
+    x-swagger-router-controller: stores
+    get:
+      operationId: findAllStore
+      summary: Lista todos los establecimientos
+      description: Devuelve listado de Establecimientos
+      produces:
+        - application/json
+        - application/xml
+        - text/html
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Establecimiento"
+    post:
+      operationId: addStore
+      summary: Crea un nuevo Establecimiento
+      description: Crea un Establecimiento al completar a traves de un formulario / json, devuelve el Establecimiento
+      consumes:
+        - application/json
+      produces:
+        - application/json
+        - application/xml
+        - text/html
+      parameters:
+        - in: body
+          name: body
+          description: Establecimiento object para agregar
+          required: true
+          schema:
+            $ref: "#/definitions/Establecimiento"
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: "#/definitions/Establecimiento"
+        "405":
+          description: Validation exception
+
+  /stores/{storeId}:
+    x-swagger-router-controller: stores
+    get:
+      operationId: findOneStore
+      summary: Detalles de un establecimiento
+      description: Devuelve un Establecimiento por su ID
+      produces:
+        - application/json
+        - application/xml
+        - text/html
+      parameters:
+        - in: path
+          name: storeId
+          description: Establecimiento ID
+          required: true
+          type: string
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Establecimiento'
+        "404":
+          description: Object not found
+
+  /stores/{storeId}/inventario:
+    x-swagger-router-controller: inventario
+    get:
+      operationId: findAllInventarioInStore
+      summary: Detalles de inventario
+      description: Devuelve todo el inventario de un Establecimiento por su ID
+      produces:
+        - application/json
+        - application/xml
+        - text/html
+      parameters:
+        - in: path
+          name: storeId
+          description: Establecimiento ID
+          required: true
+          type: string
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Inventario'
+        "404":
+          description: Object not found
+    post:
+      operationId: addInventarioInStore
+      summary: Actualiza un Categoria
+      description: Actualiza un Categoria a traves de un formulario / json, devuelve el Categoria
+      consumes:
+        - application/json
+      produces:
+        - application/json
+        - application/xml
+        - text/html
+      parameters:
+        - in: path
+          name: storeId
+          description: Establecimiento ID
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Inventario object para agregar
+          required: false
+          schema:
+            $ref: "#/definitions/Inventario"
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: "#/definitions/Inventario"
+        "405":
+          description: Validation exception
+        "404":
+          description: Producto not found
+        "400":
+          description: Invalid ID supplied
+
+  /stores/{storeId}/inventario/{itemId}:
+    x-swagger-router-controller: inventario
+    get:
+      operationId: findOneInventarioInStore
+      summary: Detalles de un establecimiento
+      description: Devuelve un Establecimiento por su ID
+      produces:
+        - application/json
+        - application/xml
+        - text/html
+      parameters:
+        - in: path
+          name: storeId
+          description: Establecimiento ID
+          required: true
+          type: string
+        - in: path
+          name: itemId
+          description: Inventario ID
+          required: true
+          type: string
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Inventario'
+        "404":
+          description: Object not found
+    put:
+      operationId: updateInventarioInStore
+      summary: Actualiza un Inventario
+      description: Actualiza un Inventario a traves de un formulario / json, devuelve el Inventario
+      consumes:
+        - application/json
+      produces:
+        - application/json
+        - application/xml
+        - text/html
+      parameters:
+        - in: path
+          name: storeId
+          description: Establecimiento ID
+          required: true
+          type: string
+        - in: path
+          name: itemId
+          description: Inventario ID
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Inventario object para agregar
+          required: false
+          schema:
+            $ref: "#/definitions/Inventario"
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: "#/definitions/Inventario"
+        "405":
+          description: Validation exception
+        "404":
+          description: Producto not found
+        "400":
+          description: Invalid ID supplied
+    delete:
+      operationId: renoveInventarioInStore
+      summary: Elimina un Inventario
+      description: Elimina un Inventario por ID
+      produces:
+        - application/json
+        - application/xml
+        - text/html
+      parameters:
+        - in: path
+          name: storeId
+          description: Establecimiento ID
+          required: true
+          type: string
+        - in: path
+          name: itemId
+          description: Inventario ID
+          required: true
+          type: string
+      responses:
+        "200":
+          description: successful operation
+        "404":
+          description: Inventario not found
+
+  /stores/{storeId}/productos:
+    x-swagger-router-controller: productos
+    get:
+      operationId: findAllProductoInStore
+      summary: Detalles de productos
+      description: Devuelve todo los productos de un Establecimiento por su ID
+      produces:
+        - application/json
+        - application/xml
+        - text/html
+      parameters:
+        - in: path
+          name: storeId
+          description: Establecimiento ID
+          required: true
+          type: string
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Producto'
+        "404":
+          description: Object not found
+
+  /stores/{storeId}/productos/{productoId}:
+    x-swagger-router-controller: productos
+    get:
+      operationId: findOneProductoInStore
+      summary: Detalles de un producto
+      description: Devuelve un Producto en un Establecimiento por su ID
+      produces:
+        - application/json
+        - application/xml
+        - text/html
+      parameters:
+        - in: path
+          name: storeId
+          description: Establecimiento ID
+          required: true
+          type: string
+        - in: path
+          name: productoId
+          description: Establecimiento ID
+          required: true
+          type: string
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Producto'
+        "404":
+          description: Object not found
+
+  /stores/{storeId}/ventas:
+    x-swagger-router-controller: ventas
+    get:
+      operationId: findAllVentaInStore
+      summary: Listado de ventas en extablecimiento
+      description: Devuelve todas las ventas de un Establecimiento por su ID
+      produces:
+        - application/json
+        - application/xml
+        - text/html
+      parameters:
+        - in: path
+          name: storeId
+          description: Establecimiento ID
+          required: true
+          type: string
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Venta'
+        "404":
+          description: Object not found
+    post:
+      operationId: addVentaInStore
+      summary: Agrega una Venta a un Establecimiento
+      description: Crea una Venta, en un Establecimiento, a traves de un formulario / json, devuelve la Venta
+      consumes:
+        - application/json
+      produces:
+        - application/json
+        - application/xml
+        - text/html
+      parameters:
+        - in: path
+          name: storeId
+          description: Establecimiento ID
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Venta object para agregar
+          required: false
+          schema:
+            $ref: "#/definitions/Venta"
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: "#/definitions/Venta"
+        "405":
+          description: Validation exception
+        "404":
+          description: Establecimiento not found
+        "400":
+          description: Invalid ID supplied
+
+  /stores/{storeId}/ventas/{ventaId}:
+    x-swagger-router-controller: ventas
+    get:
+      operationId: findOneVentaInStore
+      summary: Detalles de venta en extablecimiento
+      description: Devuelve una Ventas de un Establecimiento por su ID
+      produces:
+        - application/json
+        - application/xml
+        - text/html
+      parameters:
+        - in: path
+          name: storeId
+          description: Establecimiento ID
+          required: true
+          type: string
+        - in: path
+          name: ventaId
+          description: Venta ID
+          required: true
+          type: string
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Venta'
+        "404":
+          description: Object not found
+    put:
+      operationId: updateVentaInStore
+      summary: Actualiza una Venta de un Establecimiento
+      description: Actualiza una Venta, de un Establecimiento, a traves de un formulario / json, devuelve la Venta
+      consumes:
+        - application/json
+      produces:
+        - application/json
+        - application/xml
+        - text/html
+      parameters:
+        - in: path
+          name: storeId
+          description: Establecimiento ID
+          required: true
+          type: string
+        - in: path
+          name: ventaId
+          description: Venta ID
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Venta object para agregar
+          required: false
+          schema:
+            $ref: "#/definitions/Venta"
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: "#/definitions/Venta"
+        "405":
+          description: Validation exception
+        "404":
+          description: Establecimiento not found
+        "400":
+          description: Invalid ID supplied
+
+#  /clientes:
+#    x-swagger-router-controller: clientes
+#    get:
+#      operationId: findAll
+#    post:
+#      operationId: addCliente
+#
+#  /clientes/{clienteId}:
+#    x-swagger-router-controller: clientes
+#    get:
+#      operationId: findOne
+#    put:
+#      operationId: updateClientes
+#    delete:
+#      operationId: removeClientes
+#
+#  /users:
+#    post:
+#      tags:
+#        - user
+#      summary: Create user
+#      description: This can only be done by the logged in user.
+#      operationId: createUser
+#      produces:
+#        - application/json
+#        - application/xml
+#      parameters:
+#        - in: body
+#          name: body
+#          description: Created user object
+#          required: false
+#          schema:
+#            $ref: "#/definitions/User"
+#      responses:
+#        default:
+#          description: successful operation
+#
+#  /users/createWithArray:
+#    post:
+#      tags:
+#        - user
+#      summary: Creates list of users with given input array
+#      description: ""
+#      operationId: createUsersWithArrayInput
+#      produces:
+#        - application/json
+#        - application/xml
+#      parameters:
+#        - in: body
+#          name: body
+#          description: List of user object
+#          required: false
+#          schema:
+#            type: array
+#            items:
+#              $ref: "#/definitions/User"
+#      responses:
+#        default:
+#          description: successful operation
+#
+#  /users/createWithList:
+#    post:
+#      tags:
+#        - user
+#      summary: Creates list of users with given input array
+#      description: ""
+#      operationId: createUsersWithListInput
+#      produces:
+#        - application/json
+#        - application/xml
+#      parameters:
+#        - in: body
+#          name: body
+#          description: List of user object
+#          required: false
+#          schema:
+#            type: array
+#            items:
+#              $ref: "#/definitions/User"
+#      responses:
+#        default:
+#          description: successful operation
+#
+#  /users/login:
+#    get:
+#      tags:
+#        - user
+#      summary: Logs user into the system
+#      description: ""
+#      operationId: loginUser
+#      produces:
+#        - application/json
+#        - application/xml
+#      parameters:
+#        - in: query
+#          name: username
+#          description: The user name for login
+#          required: false
+#          type: string
+#        - in: query
+#          name: password
+#          description: The password for login in clear text
+#          required: false
+#          type: string
+#      responses:
+#        "200":
+#          description: successful operation
+#          schema:
+#            type: string
+#        "400":
+#          description: Invalid username/password supplied
+#
+#  /users/logout:
+#    get:
+#      tags:
+#        - user
+#      summary: Logs out current logged in user session
+#      description: ""
+#      operationId: logoutUser
+#      produces:
+#        - application/json
+#        - application/xml
+#      responses:
+#        default:
+#          description: successful operation
+#
+#  /users/{username}:
+#    get:
+#      tags:
+#        - user
+#      summary: Get user by user name
+#      description: ""
+#      operationId: getUserByName
+#      produces:
+#        - application/json
+#        - application/xml
+#      parameters:
+#        - in: path
+#          name: username
+#          description: The name that needs to be fetched. Use user1 for testing.
+#          required: true
+#          type: string
+#      responses:
+#        "404":
+#          description: User not found
+#        "200":
+#          description: successful operation
+#          schema:
+#            $ref: "#/definitions/User"
+#        "400":
+#          description: Invalid username supplied
+#    put:
+#      tags:
+#        - user
+#      summary: Updated user
+#      description: This can only be done by the logged in user.
+#      operationId: updateUser
+#      produces:
+#        - application/json
+#        - application/xml
+#      parameters:
+#        - in: path
+#          name: username
+#          description: name that need to be deleted
+#          required: true
+#          type: string
+#        - in: body
+#          name: body
+#          description: Updated user object
+#          required: false
+#          schema:
+#            $ref: "#/definitions/User"
+#      responses:
+#        "404":
+#          description: User not found
+#        "400":
+#          description: Invalid user supplied
+#    delete:
+#      tags:
+#        - user
+#      summary: Delete user
+#      description: This can only be done by the logged in user.
+#      operationId: deleteUser
+#      produces:
+#        - application/json
+#        - application/xml
+#      parameters:
+#        - in: path
+#          name: username
+#          description: The name that needs to be deleted
+#          required: true
+#          type: string
+#      responses:
+#        "404":
+#          description: User not found
+#        "400":
+#          description: Invalid username supplied
+
+
+securityDefinitions:
+  api_key:
+    type: apiKey
+    name: api_key
+    in: header
+  store_auth:
+    type: oauth2
+    authorizationUrl: http://quena-mti.bastianc.info/api/oauth/dialog
+    flow: implicit
+    scopes:
+      write_productos: modify productos in your account
+      read_productos: read your productos
+
+# Objects
+definitions:
+  User:
+    type: object
+    properties:
+      _id:
+        type: string
+      username:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+      userStatus:
+        type: integer
+        format: int32
+        description: User Status
+
+  Direccion:
+    type: object
+    properties:
+      _id:
+        type: string
+      pais:
+        type: string
+      region:
+        type: string
+      ciudad:
+        type: string
+      descripcion:
+        type: string
+      zipcode:
+        type: string
+      geo_lat:
+        type: number
+        format: double
+      geo_lon:
+        type: number
+        format: double
+    required:
+      - pais
+      - ciudad
+      - descripcion
+
+  Establecimiento:
+    type: object
+    properties:
+      _id:
+        type: string
+      nombre:
+        type: string
+      direccion:
+        $ref: "#/definitions/Direccion"
+    required:
+      - nombre
+
+  Categoria:
+    type: object
+    properties:
+      _id:
+        type: string
+      nombre:
+        type: string
+      descripcion:
+        type: string
+      categoriaPadre:
+        $ref: "#/definitions/Categoria"
+    required:
+      - nombre
+
+  Producto:
+    type: object
+    properties:
+      _id:
+        type: string
+      codigo_tipo:
+        type: string
+      codigo_valor:
+        type: string
+      nombre:
+        type: string
+      marca:
+        type: string
+      modelo:
+        type: string
+      descripcion:
+        type: string
+      origen:
+        type: string
+      categorias:
+        allOf:
+          - $ref: "#/definitions/Categoria"
+      caracteristicas:
+        allOf:
+          - type: object
+            properties:
+              nombre:
+                type: string
+              valor:
+                type: string
+            required:
+            - nombre
+    required:
+      - nombre
+
+  Inventario:
+    type: object
+    properties:
+      _id:
+        type: string
+      establecimiento:
+        $ref: "#/definitions/Establecimiento"
+      producto:
+        $ref: "#/definitions/Producto"
+      codigo_tipo:
+        type: string
+      codigo_valor:
+        type: string
+      precio_moneda:
+        type: string
+      precio_valor:
+        type: number
+        format: double
+      estado:
+        type: string
+      fecha_actualizado:
+        type: string
+        format: date-time
+    required:
+      - establecimiento
+      - producto
+      - estado
+
+  Cliente:
+    type: object
+    properties:
+      _id:
+        type: string
+      nombre:
+        type: string
+      apellido:
+        type: string
+      email:
+        type: string
+      fecha_registro:
+        type: string
+        format: date-time
+      estado:
+        type: string
+    required:
+      - nombre
+      - apellido
+      - estado
+
+  Venta:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      establecimiento:
+        $ref: "#/definitions/Establecimiento"
+      cliente:
+        $ref: "#/definitions/Cliente"
+      pago_moneda:
+        type: string
+      pago_valor:
+        type: number
+        format: double
+      estado:
+        type: string
+      fecha_venta:
+        type: string
+        format: date-time
+      items:
+        allOf:
+          - type: object
+            properties:
+              inventario:
+                $ref: "#/definitions/Inventario"
+              precio_moneda:
+                type: string
+              precio_valor:
+                type: string
+            required:
+            - inventario
+    required:
+      - establecimiento
+      - cliente
+      - estado
+
