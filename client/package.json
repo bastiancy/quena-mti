@@ -23,7 +23,9 @@
     "test:once": "karma start karma.conf.js --single-run",
     "lint": "tslint ./src/**/*.ts -t verbose"
   },
-  "keywords": [],
+  "engines": {
+    "node": "~4.8"
+  },
   "author": "",
   "license": "MIT",
   "dependencies": {
