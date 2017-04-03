@@ -1,2 +1,2 @@
-server-me=server
-client-me=client
+api.quena.mti.dokku.me=server
+quena.mti.dokku.me=client
