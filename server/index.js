@@ -6,7 +6,7 @@ var cors = require('cors')
 var swaggerTools = require('swagger-tools');
 var jsyaml = require('js-yaml');
 var fs = require('fs');
-var serverPort = 8080;
+var serverPort = 5000;
 var mongoose   = require('mongoose');
 mongoose.Promise = require('bluebird');
 
