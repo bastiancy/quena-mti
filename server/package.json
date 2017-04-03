@@ -7,9 +7,9 @@
     "start": "node index.js",
     "test": "mocha --recursive"
   },
-  "keywords": [
-    "swagger"
-  ],
+  "engines": {
+    "node": "~4.8"
+  },
   "license": "Unlicense",
   "private": true,
   "dependencies": {

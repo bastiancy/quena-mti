@@ -7,7 +7,7 @@ info:
   title: Quena Store
   contact:
     name: bastian.carvajal@sansano.usm.cl
-host: localhost:8080
+host: api.quena.mti.dokku.me
 basePath: /
 schemes:
   - http

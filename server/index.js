@@ -47,7 +47,7 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
   // });
 
   // connecto to db
-  mongoose.connect('mongodb://localhost/quena');
+  mongoose.connect(process.env.MONGO_URL | 'mongodb://localhost/quena');
 
   // Start the server
   http.createServer(app).listen(serverPort, function () {
