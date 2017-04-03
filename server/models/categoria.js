@@ -12,7 +12,6 @@ const CategoriaSchema   = new Schema({
 });
 
 CategoriaSchema.statics.toJson = function (data) {
-
     let def = function(item) {
         return {
             '_class': 'Categoria',
@@ -38,7 +37,6 @@ CategoriaSchema.statics.toJson = function (data) {
 };
 
 CategoriaSchema.statics.toXml = function (data, fragment) {
-
     let def = function(item) {
         return {
             'categoria': {
@@ -79,11 +77,11 @@ CategoriaSchema.statics.toXml = function (data, fragment) {
 };
 
 CategoriaSchema.statics.toHtml = function (data, fragment) {
-
     let def = function(item) {
-        return '<ul><li><a href="/categorias/' + item._id + '">id: ' + item._id + '</a></li>'
-                + '<li>nombre: ' + item.nombre + '</li>'
-                + '<li>descripcion: ' + item.descripcion + '</li>'
+        return '<ul typeof="schema:Thing">' +
+                '<li><a href="/categorias/' + item._id + '">id: <span property="schema:identifier">' + item._id + '</span></a></li>'
+                + '<li>nombre: <span property="schema:name">' + item.nombre + '</span></li>'
+                + '<li>descripcion: <span property="schema:description">' + item.descripcion + '</span></li>'
                 + '<li>categoriaPadre: '
                 + (item.categoriaPadre ? '<a href="/categorias/' + item.categoriaPadre + '">_id: ' + item.categoriaPadre + '</a>' : 'null')
                 + '</li></ul>'

@@ -9,18 +9,21 @@ import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService }  from './in-memory-data.service';
 
 import { AppComponent }         from './app.component';
-import { DashboardComponent }   from './dashboard.component';
-import { HeroDetailComponent }  from './hero-detail.component';
-import { HeroesComponent }      from './heroes.component';
-import { HeroService }          from './hero.service';
-import {HeroSearchComponent}    from "./hero-search.component";
+import { DashboardComponent }   from './heroes/dashboard.component';
+import { HeroDetailComponent }  from './heroes/hero-detail.component';
+import { HeroesComponent }      from './heroes/heroes.component';
+import { HeroService }          from './heroes/hero.service';
+import { HeroSearchComponent }  from "./heroes/hero-search.component";
+import { CategoriaService }     from "./categorias/categoria.service";
+import { CategoriasComponent }  from "./categorias/categorias.component";
+import { CategoriaDetailComponent } from "./categorias/categoria-detail.component";
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService),
+    // InMemoryWebApiModule.forRoot(InMemoryDataService),
     AppRoutingModule
   ],
   declarations: [
@@ -28,9 +31,14 @@ import {HeroSearchComponent}    from "./hero-search.component";
     DashboardComponent,
     HeroDetailComponent,
     HeroesComponent,
-    HeroSearchComponent
+    HeroSearchComponent,
+    CategoriasComponent,
+    CategoriaDetailComponent
   ],
-  providers: [ HeroService ],
+  providers: [
+      HeroService,
+      CategoriaService
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

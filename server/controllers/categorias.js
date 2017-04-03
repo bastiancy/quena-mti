@@ -70,46 +70,57 @@ module.exports.findOneCategoria = function(req, res, next) {
 module.exports.addCategoria = function(req, res, next) {
     let body = req.swagger.params.body.value;
 
-    let item = new Categoria(body);
+    let item = new Categoria();
+    item.nombre = body.nombre;
+    item.descripcion = body.descripcion;
+
     item.save(function (err) {
         if (err) {
             return next(new Error(err));
         }
 
+        let result = Categoria.toJson(item);
         res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify('created!', null, 2));
+        res.end(result);
     });
 };
 
-function updateCategoria(req, res) {
+module.exports.updateCategoria = function(req, res) {
     var categoriaId = req.swagger.params.categoriaId.value;
     var body = req.swagger.params.body.value;
 
     Categoria.findById(categoriaId, function(err, item) {
-        if (err)
-            res.send(err);
+        if (err) {
+            return next(new Error(err));
+        }
 
-        item.nombre = body.nombre;  // update the bears info
+        item.nombre = body.nombre;
+        item.descripcion = body.descripcion;
 
         // save the bear
         item.save(function(err) {
-            if (err)
-                res.send(err);
+            if (err) {
+                return next(new Error(err));
+            }
 
-            res.json(item);
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify('updated id: ' + categoriaId));
         });
     });
-}
+};
 
-function removeCategoria(req, res) {
+module.exports.removeCategoria = function(req, res) {
     var categoriaId = req.swagger.params.categoriaId.value;
 
     Categoria.remove({
         _id: categoriaId
     }, function(err, item) {
-        if (err)
-            res.send(err);
+        if (err) {
+            return next(new Error(err));
+        }
 
-        res.json({ id: categoriaId });
+        let result = Categoria.toJson(item);
+        res.setHeader('Content-Type', 'application/json');
+        res.end(result);
     });
-}
+};

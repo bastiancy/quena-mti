@@ -1,36 +1,37 @@
 'use strict';
 
-var util = require('util');
-var accepts = require('accepts');
-var jstoxml = require('../helpers/js2xml');
-var Producto = require('../models/producto');
+const util = require('util');
+const accepts = require('accepts');
+const jstoxml = require('../helpers/js2xml');
+const Producto = require('../models/producto');
 
 module.exports.findAllProducto = function(req, res, next) {
     Producto.find(function (err, items) {
-        var params = req.swagger.params;
-        var accept = accepts(req);
+        let accept = accepts(req);
+        let result = null;
 
         if (err) {
-            next(err);
+            return next(new Error(err));
         }
 
         switch(accept.type(['json', 'xml', 'html'])) {
             case 'xml':
-                res.setHeader('Content-Type', 'text/html');
-                res.write('<b>hello, world!</b>');
+                result = Producto.toXml(data, false);
+                res.setHeader('Content-Type', 'application/xml');
+                res.end(result);
                 break;
             case 'html':
+                result = Producto.toHtml(data, false);
                 res.setHeader('Content-Type', 'text/html');
-                res.write('<b>hello, world!</b>');
+                res.end(result);
                 break;
             default:
                 // fallback to json
+                result = Producto.toJson(data);
                 res.setHeader('Content-Type', 'application/json');
-                res.write(JSON.stringify(items, null, 2));
+                res.end(result);
                 break;
         }
-
-        res.end();
     });
 };
 

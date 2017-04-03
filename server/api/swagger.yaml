@@ -244,8 +244,7 @@ paths:
           name: categoriaId
           description: Categoria ID
           required: true
-          type: "number"
-          format: "int64"
+          type: string
       responses:
         "200":
           description: successful operation
