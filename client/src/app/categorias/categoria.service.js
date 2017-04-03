@@ -14,7 +14,7 @@ require("rxjs/add/operator/toPromise");
 var CategoriaService = (function () {
     function CategoriaService(http) {
         this.http = http;
-        this.categoriasUrl = 'http://localhost:8080/categorias'; // URL to web api
+        this.categoriasUrl = 'http://api.quena.mti.dokku.me/categorias';
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
     }
     CategoriaService.prototype.getCategorias = function () {

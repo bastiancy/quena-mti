@@ -7,7 +7,7 @@ import { Categoria } from './categoria';
 
 @Injectable()
 export class CategoriaService {
-    private categoriasUrl = 'http://localhost:8080/categorias';  // URL to web api
+    private categoriasUrl = 'http://api.quena.mti.dokku.me/categorias';
     private headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(private http: Http) { }
