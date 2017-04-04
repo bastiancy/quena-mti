@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE store [
+    <!ELEMENT store (direccion, establecimiento, categoria, producto, inventario, cliente, venta, itemVenta)>
+    
+    <!ELEMENT direccion (pais, region, ciudad, descripcion, zipcode, geo)>
+	  <!ATTLIST direccion class CDATA #IMPLIED
+                           id CDATA #IMPLIED
+                           href CDATA #IMPLIED>
+    
+    <!ELEMENT geo (#PCDATA)>
+    <!ATTLIST geo lat CDATA #REQUIRED
+                  lon CDATA #REQUIRED>
+
+    <!ELEMENT establecimiento (nombre, direccionRef)>
+    <!ATTLIST establecimiento class CDATA #IMPLIED
+                                 id CDATA #IMPLIED>
+
+
+    <!ELEMENT categoria (nombre, descripcion, categoriaPadre)>
+    <!ELEMENT categoriaPadre (categoriaRef)>
+    <!ATTLIST categoria class CDATA #REQUIRED
+                           id CDATA #REQUIRED>
+
+    <!ELEMENT producto (codigo, nombre, marca, modelo, descripcion, categorias*, origen, caracteristicas*)>
+    <!ATTLIST producto class CDATA #REQUIRED
+                          id CDATA #REQUIRED>
+
+    <!ELEMENT caracteristica (#PCDATA)>
+    <!ATTLIST caracteristica nombre CDATA #REQUIRED
+                          value CDATA #REQUIRED>
+
+    <!ELEMENT direccionRef (#PCDATA)>
+    <!ATTLIST direccionRef href CDATA #REQUIRED>
+
+    <!ELEMENT categoriaRef (#PCDATA)>
+    <!ATTLIST categoriaRef href CDATA #REQUIRED>
+
+    <!ELEMENT productoRef (#PCDATA)>
+    <!ATTLIST productoRef href CDATA #REQUIRED>
+
+    <!ELEMENT clienteRef (#PCDATA)>
+    <!ATTLIST clienteRef href CDATA #REQUIRED>
+
+    <!ELEMENT ventaRef (#PCDATA)>
+    <!ATTLIST ventaRef href CDATA #REQUIRED>
+ 
+    <!ELEMENT inventarioRef (#PCDATA)>
+    <!ATTLIST inventarioRef href CDATA #REQUIRED>
+
+    <!ELEMENT establecimientoRef (#PCDATA)>
+    <!ATTLIST establecimientoRef href CDATA #REQUIRED>
+    
+    <!ELEMENT codigo (#PCDATA)>
+    <!ATTLIST codigo type CDATA #REQUIRED>
+
+    <!ELEMENT precio (#PCDATA)>
+    <!ATTLIST precio monto CDATA #REQUIRED
+                    moneda CDATA #REQUIRED>
+
+    <!ELEMENT pago (#PCDATA)>
+    <!ATTLIST pago monto CDATA #REQUIRED
+                    moneda CDATA #REQUIRED>
+
+    <!ELEMENT inventario (establecimientoRef, productoRef, codigo, precio, estado, fecha_actualizado)>
+    <!ATTLIST inventario class CDATA #REQUIRED
+                            id CDATA #REQUIRED>
+
+    <!ELEMENT cliente (nombre, apellido, email, fecha_registro, estado)>
+    <!ATTLIST cliente class CDATA #REQUIRED
+                            id CDATA #REQUIRED>
+
+    <!ELEMENT venta (establecimientoRef, clienteRef, pago, estado, fecha_venta)>
+    <!ATTLIST venta class CDATA #REQUIRED
+                            id CDATA #REQUIRED>
+   
+    <!ELEMENT itemVenta (ventaRef, inventarioRef, precio)>
+
+    <!ELEMENT nombre (#PCDATA)>
+    <!ELEMENT apellido (#PCDATA)>
+    <!ELEMENT email (#PCDATA)>
+    <!ELEMENT pais (#PCDATA)>
+    <!ELEMENT region (#PCDATA)>
+    <!ELEMENT ciudad (#PCDATA)>
+    <!ELEMENT descripcion (#PCDATA)>
+    <!ELEMENT zipcode (#PCDATA)>
+    <!ELEMENT marca (#PCDATA)>
+    <!ELEMENT modelo (#PCDATA)>
+    <!ELEMENT categorias (categoriaRef)*>
+    <!ELEMENT origen (#PCDATA)>
+    <!ELEMENT caracteristicas (caracteristica)*>
+    <!ELEMENT estado (#PCDATA)>
+    <!ELEMENT fecha_actualizado (#PCDATA)>
+    <!ELEMENT fecha_registro (#PCDATA)>
+    <!ELEMENT fecha_venta (#PCDATA)>
+    
+ ]>
+<store>
+
+  <direccion class="Direccion" id="1">
+    <pais>Chile</pais>
+    <region>RM</region>
+    <ciudad>Santiago</ciudad>
+    <descripcion>Calle Falsa 123</descripcion>
+    <zipcode>1111111</zipcode>
+    <geo lat="123" lon="456" />
+  </direccion>
+
+  <establecimiento class="Establecimiento" id="1">
+    <nombre>Audiomusica</nombre>
+    <direccionRef href="store/direccion#1" />
+  </establecimiento>
+
+  <categoria class="Categoria" id="1">
+    <nombre>Cuerdas</nombre>
+    <descripcion>Instrumentos de cuerdas con caja de resonancia</descripcion>
+    <categoriaPadre>
+       <categoriaRef href="store/categoria#1" />
+    </categoriaPadre>
+  </categoria>
+
+  <producto class="Producto" id="1">
+    <codigo type="part_number">G123456</codigo>
+    <nombre>Guitarra electrica</nombre>
+    <marca>Ibanez</marca>
+    <modelo>G1</modelo>
+    <descripcion>Guitarra de 6 cuerdas estilo stratocaster</descripcion>
+    <categorias>
+        <categoriaRef href="store/categoria#1" />
+    </categorias>
+    <origen>Europa occidental</origen>
+    <caracteristicas>
+        <caracteristica nombre="color" value="negro" />
+        <caracteristica nombre="tipo cuerda" value="steel" />
+        <caracteristica nombre="numero cuerdas" value="6" />
+    </caracteristicas>
+  </producto>
+
+  <inventario class="Inventario" id="1">
+    <establecimientoRef href="store/establecimiento#1" />
+    <productoRef href="store/producto#1" />
+    <codigo type="serial_number">123456789</codigo>
+    <precio monto="1234" moneda="CLP" />
+    <estado>ingreso</estado>
+    <fecha_actualizado>2017-01-01</fecha_actualizado>
+  </inventario>
+
+  <cliente class="Cliente" id="1">
+    <nombre>Juan</nombre>
+    <apellido>Gonzalez</apellido>
+    <email>juan@example.com</email>
+    <fecha_registro>2017-01-01</fecha_registro>
+    <estado>activo</estado>
+  </cliente>
+
+  <venta class="Venta" id="1">
+    <establecimientoRef href="store/establecimiento#1" />
+    <clienteRef href="store/cliente#1" />
+    <pago monto="1234" moneda="CLP" />
+    <estado>terminado</estado>
+    <fecha_venta>2017-01-01 20:00</fecha_venta>
+  </venta>
+
+  <itemVenta>
+    <ventaRef href="store/venta#1" />
+    <inventarioRef href="store/inventario#1" />
+    <precio monto="1234" moneda="CLP" />
+  </itemVenta>
+
+</store>

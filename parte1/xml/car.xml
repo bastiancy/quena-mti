@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Fleet shipperName="Shipper1" 
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:noNamespaceSchemaLocation="car.xsd">
+
+    <Car id="car1">
+        <plate>AAA</plate>
+        <mark>Peugeot</mark>
+        <model>206</model>
+    </Car>
+
+    <Truck id="truck1">
+        <plate>DDD</plate>
+        <mark>Scania</mark>
+        <model></model>
+    </Truck>
+
+    <Trailer id="trailer1">
+        <plate>EEE</plate>
+        <mark>Scania</mark>
+        <model></model>
+    </Trailer>
+
+    <TrailerTruck id="trailerTruck1">
+        <Car refid="car1"/>
+        <Trailer refid="trailer1"/>
+    </TrailerTruck>
+
+    <TrailerTruck id="trailerTruck2_WRONG">
+        <Truck refid="truck1"/>
+        <Trailer refid="trailer1"/>
+    </TrailerTruck>
+
+    <TrailerTruck id="trailerTruck3_WRONG">
+        <Truck refid="truck1"/>
+        <Trailer refid="trailer1"/>
+    </TrailerTruck>
+
+</Fleet>

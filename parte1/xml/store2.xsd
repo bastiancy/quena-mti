@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  targetNamespace="http://www.example.org/store"
+  xmlns:tns="http://www.example.org/store"
+  elementFormDefault="qualified">
+
+  <xs:element name="store">
+    <xs:annotation>
+      <xs:documentation>
+        Quena store object schema
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence maxOccurs="unbounded">
+        
+        <xs:element name="direccion">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="pais" />
+              <xs:element name="region" />
+              <xs:element name="ciudad" />
+              <xs:element name="descripcion" />
+              <xs:element name="zipcode" />
+              <xs:element name="geo">
+                  <xs:complexType>
+                    <xs:attribute name="lat" type="xs:integer" />
+                    <xs:attribute name="lon" type="xs:integer" />
+                  </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="class" type="xs:string" />
+            <xs:attribute name="id" type="xs:ID" />
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="establecimiento">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="nombre" />
+              <xs:element name="direccion" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="ref" type="xs:IDREF"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="class" type="xs:string" />
+            <xs:attribute name="id" type="xs:ID" />
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="categoria">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="nombre" />
+              <xs:element name="descripcion" />
+              <xs:element name="categoriaPadre" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="ref" type="xs:IDREF"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="class" type="xs:string" />
+            <xs:attribute name="id" type="xs:ID" />
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="producto">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="codigo">
+                  <xs:complexType>
+                    <xs:simpleContent>
+                      <xs:extension base="xs:string">
+                        <xs:attribute name="tipo" type="xs:string" />
+                      </xs:extension>
+                    </xs:simpleContent>
+                  </xs:complexType>
+              </xs:element>
+              <xs:element name="nombre" />
+              <xs:element name="marca" />
+              <xs:element name="modelo" />
+              <xs:element name="descripcion" />
+              <xs:element name="origen" />
+              <xs:element name="categorias">
+                  <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="categoria" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <xs:attribute name="ref" type="xs:IDREF"/>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                  </xs:complexType>
+              </xs:element>
+              <xs:element name="caracteristicas">
+                  <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="caracteristica" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <xs:simpleContent>
+                                  <xs:extension base="xs:string">
+                                    <xs:attribute name="nombre" type="xs:string" />
+                                  </xs:extension>
+                                </xs:simpleContent>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                  </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="class" type="xs:string" />
+            <xs:attribute name="id" type="xs:ID" />
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="inventario">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="establecimiento" minOccurs="1" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="ref" type="xs:IDREF"/>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="producto" minOccurs="1" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="ref" type="xs:IDREF"/>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="codigo">
+                  <xs:complexType>
+                    <xs:simpleContent>
+                      <xs:extension base="xs:string">
+                        <xs:attribute name="tipo" type="xs:string" />
+                      </xs:extension>
+                    </xs:simpleContent>
+                  </xs:complexType>
+              </xs:element>
+              <xs:element name="precio">
+                  <xs:complexType>
+                    <xs:simpleContent>
+                      <xs:extension base="xs:decimal">
+                        <xs:attribute name="moneda" type="xs:string" />
+                      </xs:extension>
+                    </xs:simpleContent>
+                  </xs:complexType>
+              </xs:element>
+              <xs:element name="estado" />
+              <xs:element name="fecha_actualizado" type="xs:date" />
+            </xs:sequence>
+            <xs:attribute name="class" type="xs:string" />
+            <xs:attribute name="id" type="xs:ID" />
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="cliente">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="nombre" />
+              <xs:element name="apellido" />
+              <xs:element name="email" />
+              <xs:element name="fecha_registro" type="xs:date" />
+              <xs:element name="estado" />
+            </xs:sequence>
+            <xs:attribute name="class" type="xs:string" />
+            <xs:attribute name="id" type="xs:ID" />
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="venta">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="establecimiento" minOccurs="1" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="ref" type="xs:IDREF"/>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="cliente" minOccurs="1" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="ref" type="xs:IDREF"/>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="pago">
+                  <xs:complexType>
+                    <xs:simpleContent>
+                      <xs:extension base="xs:decimal">
+                        <xs:attribute name="moneda" type="xs:string" />
+                      </xs:extension>
+                    </xs:simpleContent>
+                  </xs:complexType>
+              </xs:element>
+              <xs:element name="estado" />
+              <xs:element name="fecha_venta" type="xs:dateTime" />
+            </xs:sequence>
+            <xs:attribute name="class" type="xs:string" />
+            <xs:attribute name="id" type="xs:ID" />
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="itemVenta">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="venta" minOccurs="1" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="ref" type="xs:IDREF"/>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="inventario" minOccurs="1" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="ref" type="xs:IDREF"/>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="precio">
+                  <xs:complexType>
+                    <xs:simpleContent>
+                      <xs:extension base="xs:decimal">
+                        <xs:attribute name="moneda" type="xs:string" />
+                      </xs:extension>
+                    </xs:simpleContent>
+                  </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

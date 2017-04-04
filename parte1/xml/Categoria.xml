@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE categoria [
+    <!ELEMENT categoria (nombre, descripcion, padre)>
+    <!ELEMENT nombre (#PCDATA)>
+    <!ELEMENT descripcion (#PCDATA)>
+    <!ELEMENT padre (#PCDATA)>
+	<!ATTLIST categoria class CDATA #REQUIRED
+					       id CDATA #REQUIRED>
+	<!ATTLIST padre class CDATA #REQUIRED
+					value CDATA #IMPLIED>
+ ]>
+<categoria class="Categoria" id="1">
+  <nombre>Cuerdas</nombre>
+  <descripcion>Instrumentos de cuerdas con caja de resonancia</descripcion>
+  <padre class="Categoria" value="1" />
+</categoria>

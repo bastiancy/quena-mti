@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ex:store xmlns:ex="http://www.example.org/store"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.example.org/store store2.xsd ">
+
+  <ex:direccion class="Direccion" id="id-101">
+    <ex:pais>Chile</ex:pais>
+    <ex:region>RM</ex:region>
+    <ex:ciudad>Santiago</ex:ciudad>
+    <ex:descripcion>Calle Falsa 123</ex:descripcion>
+    <ex:zipcode>1111111</ex:zipcode>
+    <ex:geo lat="123" lon="456" />
+  </ex:direccion>
+
+  <ex:establecimiento class="Establecimiento" id="id-201">
+    <ex:nombre>Audiomusica</ex:nombre>
+    <ex:direccion ref="id-101" />
+  </ex:establecimiento>
+
+  <ex:categoria class="Categoria" id="id-301">
+    <ex:nombre>Cuerdas</ex:nombre>
+    <ex:descripcion>Instrumentos de cuerdas con caja de resonancia</ex:descripcion>
+    <ex:categoriaPadre ref="id-301" />
+  </ex:categoria>
+
+  <ex:producto class="Producto" id="id-401">
+    <ex:codigo tipo="part_number">G123456</ex:codigo>
+    <ex:nombre>Guitarra electrica</ex:nombre>
+    <ex:marca>Ibanez</ex:marca>
+    <ex:modelo>G1</ex:modelo>
+    <ex:descripcion>Guitarra de 6 cuerdas estilo stratocaster</ex:descripcion>
+    <ex:origen>Europa occidental</ex:origen>
+    <ex:categorias>
+        <ex:categoria ref="id-301" />
+    </ex:categorias>
+    <ex:caracteristicas>
+        <ex:caracteristica nombre="color">negro</ex:caracteristica>
+        <ex:caracteristica nombre="tipo cuerda">steel</ex:caracteristica>
+        <ex:caracteristica nombre="numero cuerdas">6</ex:caracteristica>
+    </ex:caracteristicas>
+  </ex:producto>
+
+  <ex:inventario class="Inventario" id="id-501">
+    <ex:establecimiento ref="id-201" />
+    <ex:producto ref="id-401" />
+    <ex:codigo tipo="serial_number">123456789</ex:codigo>
+    <ex:precio moneda="CLP">10000.0</ex:precio>
+    <ex:estado>ingreso</ex:estado>
+    <ex:fecha_actualizado>2017-01-01</ex:fecha_actualizado>
+  </ex:inventario>
+
+  <ex:cliente class="Cliente" id="id-601">
+    <ex:nombre>Juan</ex:nombre>
+    <ex:apellido>Gonzalez</ex:apellido>
+    <ex:email>juan@example.com</ex:email>
+    <ex:fecha_registro>2017-01-01</ex:fecha_registro>
+    <ex:estado>activo</ex:estado>
+  </ex:cliente>
+
+  <ex:venta class="Venta" id="id-701">
+    <ex:establecimiento ref="id-201" />
+    <ex:cliente ref="id-601" />
+    <ex:pago moneda="CLP">20000.0</ex:pago>
+    <ex:estado>terminado</ex:estado>
+    <ex:fecha_venta>2016-12-25T08:30:00</ex:fecha_venta>
+  </ex:venta>
+
+  <ex:itemVenta>
+    <ex:venta ref="id-701" />
+    <ex:inventario ref="id-501" />
+    <ex:precio moneda="CLP">20000.0</ex:precio>
+  </ex:itemVenta>
+
+</ex:store>
