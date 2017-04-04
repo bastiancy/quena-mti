@@ -1,5 +1,6 @@
-var express = require('express')
-var app = express()
+var express = require('express');
+var app = express();
+var path = require('path');
 
 // other route
 app.get('/schemas', function (req, res) {
