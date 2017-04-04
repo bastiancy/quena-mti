@@ -1,6 +1,7 @@
 {
   "server": {
     "baseDir": "aot",
+    "port": 5000,
     "routes": {
       "/node_modules": "node_modules"
     }
