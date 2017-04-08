@@ -1,27 +1,150 @@
-[
-  {
-    "id": 2,
-    "name": "An ice sculpture",
-    "price": 12.50,
-    "tags": ["cold", "ice"],
-    "dimensions": {
-      "length": 7.0,
-      "width": 12.0,
-      "height": 9.5
+{
+  "direcciones": [
+    {
+      "_class": "Direccion",
+      "_id": 1,
+      "pais": "string",
+      "region": "string",
+      "ciudad": "string",
+      "descripcion": "string",
+      "zipcode": 123,
+      "geo": {
+        "lat": 1.0,
+        "lon": 2.0
+      }
     }
-  },
-  {
-    "id": 3,
-    "name": "A blue mouse",
-    "price": 25.50,
-    "dimensions": {
-      "length": 3.1,
-      "width": 1.0,
-      "height": 1.0
-    },
-    "warehouseLocation": {
-      "latitude": 54.4,
-      "longitude": -32.7
+  ],
+  "establecimientos": [
+    {
+      "_class": "Establecimiento",
+      "_id": 2,
+      "nombre": "string",
+      "direccion": {
+        "_class": "Direccion",
+        "_id": 1,
+        "pais": "string",
+        "region": "string",
+        "ciudad": "string",
+        "descripcion": "string",
+        "zipcode": 123,
+        "geo": {
+          "lat": 1.0,
+          "lon": 2.0
+        }
+      }
     }
-  }
-]
+  ],
+  "categorias": [
+    {
+      "_class": "Categoria",
+      "_id": 3,
+      "nombre": "string",
+      "descripcion": "string",
+      "categoriaPadre": null
+    }
+  ],
+  "productos": [
+    {
+      "_class": "Producto",
+      "_id": 4,
+      "codigo": {"tipo": "string", "valor": "string"},
+      "nombre": "string",
+      "marca": "string",
+      "modelo": "string",
+      "descripcion": "string",
+      "origen": "string",
+      "categorias": [
+        {
+          "_class": "Categoria",
+          "_id": 3,
+          "nombre": "string",
+          "descripcion": "string",
+          "categoriaPadre": null
+        }
+      ],
+      "caracteristicas": [
+        {"nombre": "color", "valor": "string"},
+        {"nombre": "tamano", "valor": "string"}
+      ]
+    }
+  ],
+  "inventario": [
+    {
+      "_class": "Inventario",
+      "_id": 5,
+      "establecimiento": {
+        "_class": "Establecimiento",
+        "_id": 2,
+        "nombre": "string",
+        "direccion": {
+          "_class": "Direccion",
+          "_id": 1,
+          "pais": "string",
+          "region": "string",
+          "ciudad": "string",
+          "descripcion": "string",
+          "zipcode": 123,
+          "geo": {
+            "lat": 1.0,
+            "lon": 2.0
+          }
+        }
+      },
+      "producto": {
+        "_class": "Producto",
+        "_id": 4,
+        "codigo": {"tipo": "string", "valor": "string"},
+        "nombre": "string",
+        "marca": "string",
+        "modelo": "string",
+        "descripcion": "string",
+        "origen": "string",
+        "categorias": [
+          {
+            "_class": "Categoria",
+            "_id": 3,
+            "nombre": "string",
+            "descripcion": "string",
+            "categoriaPadre": null
+          }
+        ],
+        "caracteristicas": [
+          {"nombre": "color", "valor": "string"},
+          {"nombre": "tamano", "valor": "string"}
+        ]
+      },
+      "codigo": {"tipo": "string", "valor": "string"},
+      "precio": {"moneda": "string", "valor": 1000.0},
+      "estado": "string",
+      "fecha_actualizado": "2017-01-01"
+    }
+  ],
+  "clientes": [
+    {
+      "_class": "Cliente",
+      "_id": 5,
+      "nombre": "string",
+      "apellido": "string",
+      "email": "string",
+      "fecha_registro": "2017-01-01",
+      "estado": "string"
+    }
+  ],
+  "ventas": [
+    {
+      "_class": "Venta",
+      "_id": 5,
+      "establecimiento": {"_class": "Establecimiento", "_ref": 2},
+      "cliente": {"_class": "Cliente", "_ref": 2},
+      "pago": {"moneda": "string", "valor": 1000.0},
+      "estado": "string",
+      "fecha_venta": "2017-01-01",
+      "items": [
+        {
+          "inventario": {"_class": "Inventario", "_ref": 2},
+          "precio": {"moneda": "string", "valor": 1000.0}
+        }
+      ]
+    }
+  ]
+}

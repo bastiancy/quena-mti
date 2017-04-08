@@ -1,217 +1,41 @@
 {
-  "id": "/All",
-  "type": "object",
-  "properties": {
-    "validateType1": {
-      "type": "string"
-    },
-    "validateType2": {
-      "type": ["boolean", "string"]
-    },
-    "validateType3": {
-      "not": "string"
-    },
-    "validateType4": {
-      "disallow": ["boolean", "string"]
-    },
-    "validateProperties": {
-      "type": "object",
-      "properties": {
-        "a": {
-          "type": "array"
-        },
-        "b": {
-          "type": "integer"
-        }
-      }
-    },
-    "validatePatternProperties": {
-      "type": "object",
-      "patternProperties": {
-        
-        
-        "^x1\\d*$": {
-          "type": "array"
-        },
-        "^[a-z]+$": {
-          "type": "integer"
-        }
-      }
-    },
-    "validateAdditionalProperties1": {
-      "type": "object",
-      "properties": {
-        "a": {
-          "type": "array"
-        }
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Product set",
+  "type": "array",
+  "items": {
+    "title": "Product",
+    "type": "object",
+    "properties": {
+      "id": {
+        "description": "The unique identifier for a product",
+        "type": "number"
       },
-      "patternProperties": {
-        "[b-z]+": {
-          "type": "integer"
-        }
-      },
-      "additionalProperties": {
-        "type": "boolean"
-      }
-    },
-    "validateAdditionalProperties2": {
-      "type": "object",
-      "properties": {
-        "a": {
-          "type": "array"
-        }
-      },
-      "patternProperties": {
-        "[b-z]+": {
-          "type": "integer"
-        }
-      },
-      "additionalProperties": false
-    },
-    "validateNumberOfProperties": {
-      "type": "object",
-      "patternProperties": {
-        "[a-z]+": {
-          "type": "string"
-        }
-      },
-      "minProperties": 1,
-      "maxProperties": 2
-    },
-    "validateRequired": {
-      "type": "any",
-      "required": true
-    },
-    "validateRequiredProperties1": {
-      "type": "object",
-      "required": [
-        "propA",
-        "propB"
-      ]
-    },
-    "validateRequiredProperties2": {
-      "type": "object",
-      "properties": {
-        "propA": {
-          "required": true
-        },
-        "propB": {
-          "required": true
-        }
-      }
-    },
-    "validateItems": {
-      "type": "array",
-      "items": {
+      "name": {
         "type": "string"
-      }
-    },
-    "validateNumberOfItems": {
-      "type": "array",
-      "minItems": 1,
-      "maxItems": 2
-    },
-    "validateUniqueItems": {
-      "type": "array",
-      "uniqueItems": true
-    },
-    "validateNumber": {
-      "type": ["number"],
-      "minimum": 0,
-      "maximum": 10,
-      
-      "divisibleBy": 2.4,
-      "multipleOf": 4.8
-    },
-    "validateInteger": {
-      "type": ["integer"],
-      
-      "divisibleBy": 2,
-      "multipleOf": 4
-    },
-    "validatePattern1": {
-      "type": "string",
-      "pattern": "str"
-    },
-    "validatePattern2": {
-      "type": "string",
-      "pattern": "\\w+"
-    },
-    "validateFormat": {
-      "type": "string",
-      
-      "format": "color"
-    },
-    "validateLength": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 2
-    },
-    "validateEnum": {
-      "enum": [
-        "value",
-        {
-          "x": 11
-        }
-      ]
-    },
-    "validateDependencies1": {
-      "type": "object",
-      "properties": {
-        "a": {
+      },
+      "price": {
+        "type": "number",
+        "minimum": 0,
+        "exclusiveMinimum": true
+      },
+      "tags": {
+        "type": "array",
+        "items": {
           "type": "string"
         },
-        "b": {
-          "type": "boolean"
-        }
+        "minItems": 1,
+        "uniqueItems": true
       },
-      "dependencies": {
-        "a": "b"
+      "dimensions": {
+        "type": "object",
+        "properties": {
+          "length": {"type": "number"},
+          "width": {"type": "number"},
+          "height": {"type": "number"}
+        },
+        "required": ["length", "width", "height"]
       }
     },
-    "validateDependencies2": {
-      "type": "object",
-      "properties": {
-        "a": {
-          "type": "string"
-        },
-        "b": {
-          "type": "boolean"
-        },
-        "c": {
-          "type": "number"
-        }
-      },
-      "dependencies": {
-        "a": ["b", "c"]
-      }
-    },
-    "validateAnyOf": { "anyOf" : [
-      {
-        "type": "boolean"
-      },
-      {
-        "type": "string"
-      }
-    ]},
-    "validateAllOf": { "allOf" : [
-      {
-        "type": "boolean"
-      },
-      {
-        "enum": [true]
-      }
-    ]},
-    "validateOneOf": { "oneOf" : [
-      {
-        "type": "boolean"
-      },
-      {
-        "type": "integer"
-      }
-    ]},
-    "validateReference": {
-      "$ref": "/ReferencedSchema"
-    }
+    "required": ["id", "name", "price"]
   }
 }

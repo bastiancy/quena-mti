@@ -1,41 +1,299 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Product set",
-  "type": "array",
-  "items": {
-    "title": "Product",
-    "type": "object",
-    "properties": {
-      "id": {
-        "description": "The unique identifier for a product",
-        "type": "number"
-      },
-      "name": {
-        "type": "string"
-      },
-      "price": {
-        "type": "number",
-        "minimum": 0,
-        "exclusiveMinimum": true
-      },
-      "tags": {
-        "type": "array",
-        "items": {
+  "definitions": {
+    "direccion": {
+      "type": "object",
+      "properties": {
+        "_class": {
+          "description": "Class of the object, used to identify the mongo schema in json representation",
           "type": "string"
         },
-        "minItems": 1,
-        "uniqueItems": true
-      },
-      "dimensions": {
-        "type": "object",
-        "properties": {
-          "length": {"type": "number"},
-          "width": {"type": "number"},
-          "height": {"type": "number"}
+        "_id": {
+          "description": "The unique identifier as an 32 bytes string",
+          "type": "string"
         },
-        "required": ["length", "width", "height"]
+        "pais": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "ciudad": {
+          "type": "string"
+        },
+        "descripcion": {
+          "type": "string"
+        },
+        "zipcode": {
+          "type": "number"
+        },
+        "geo": {
+          "type": "object",
+          "properties": {
+            "lat": {"type": "number"},
+            "lon": {"type": "number"}
+          },
+          "required": ["lat", "lon"]
+        }
+      },
+      "required": ["_class", "_id", "pais"]
+    },
+    "establecimiento": {
+      "type": "object",
+      "properties": {
+        "_class": {
+          "description": "Class of the object, used to identify the mongo schema in json representation",
+          "type": "string"
+        },
+        "_id": {
+          "description": "The unique identifier as an 32 bytes string",
+          "type": "string"
+        },
+        "nombre": {
+          "type": "string"
+        },
+        "direccion": {
+          "$ref": "#/definitions/direccion"
+        }
       }
     },
-    "required": ["id", "name", "price"]
+    "categoria": {
+      "type": "object",
+      "properties": {
+        "_class": {
+          "description": "Class of the object, used to identify the mongo schema in json representation",
+          "type": "string"
+        },
+        "_id": {
+          "description": "The unique identifier as an 32 bytes string",
+          "type": "string"
+        },
+        "nombre": {
+          "type": "string"
+        },
+        "descripcion": {
+          "type": "string"
+        },
+        "categoriaPadre": {
+          "$ref": "#/definitions/categoria"
+        }
+      },
+      "required": ["_class", "_id", "nombre"]
+    },
+    "producto": {
+      "type": "object",
+      "properties": {
+        "_class": {
+          "description": "Class of the object, used to identify the mongo schema in json representation",
+          "type": "string"
+        },
+        "_id": {
+          "description": "The unique identifier as an 32 bytes string",
+          "type": "string"
+        },
+        "codigo": {
+          "type": "object",
+          "properties": {
+            "tipo": {"type": "string"},
+            "valor": {"type": "string"}
+          }
+        },
+        "nombre": {
+          "type": "string"
+        },
+        "marca": {
+          "type": "string"
+        },
+        "modelo": {
+          "type": "string"
+        },
+        "descripcion": {
+          "type": "string"
+        },
+        "origen": {
+          "type": "string"
+        },
+        "categorias": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/categoria"
+          }
+        },
+        "caracteristicas": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "nombre": {"type": "string"},
+              "valor": {"type": "string"}
+            }
+          }
+        }
+      },
+      "required": ["_class", "_id", "nombre", "codigo"]
+    },
+    "inventario": {
+      "type": "object",
+      "properties": {
+        "_class": {
+          "description": "Class of the object, used to identify the mongo schema in json representation",
+          "type": "string"
+        },
+        "_id": {
+          "description": "The unique identifier as an 32 bytes string",
+          "type": "string"
+        },
+        "establecimiento": {
+          "$ref": "#/definitions/establecimiento"
+        },
+        "producto": {
+          "$ref": "#/definitions/producto"
+        },
+        "codigo": {
+          "type": "object",
+          "properties": {
+            "tipo": {"type": "string"},
+            "valor": {"type": "string"}
+          }
+        },
+        "precio": {
+          "type": "object",
+          "properties": {
+            "moneda": {"type": "string"},
+            "valor": {"type": "number"}
+          }
+        },
+        "estado": {
+          "type": "string"
+        },
+        "fecha_actualizado": {
+          "type": "date"
+        }
+      },
+      "required": ["_class", "_id", "nombre", "codigo"]
+    },
+    "cliente": {
+      "type": "object",
+      "properties": {
+        "_class": {
+          "description": "Class of the object, used to identify the mongo schema in json representation",
+          "type": "string"
+        },
+        "_id": {
+          "description": "The unique identifier as an 32 bytes string",
+          "type": "string"
+        },
+        "nombre": {
+          "type": "string"
+        },
+        "apellido": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "fecha_registro": {
+          "type": "date"
+        },
+        "estado": {
+          "type": "string"
+        }
+      }
+    },
+    "venta": {
+      "type": "object",
+      "properties": {
+        "_class": {
+          "description": "Class of the object, used to identify the mongo schema in json representation",
+          "type": "string"
+        },
+        "_id": {
+          "description": "The unique identifier as an 32 bytes string",
+          "type": "string"
+        },
+        "establecimiento": {
+          "$ref": "#/definitions/establecimiento"
+        },
+        "cliente": {
+          "$ref": "#/definitions/cliente"
+        },
+        "pago": {
+          "type": "object",
+          "properties": {
+            "moneda": {"type": "string"},
+            "valor": {"type": "number"}
+          }
+        },
+        "estado": {
+          "type": "string"
+        },
+        "fecha_venta": {
+          "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "inventario": {
+                "$ref": "#/definitions/inventario"
+              },
+              "precio": {
+                "type": "object",
+                "properties": {
+                  "moneda": {"type": "string"},
+                  "valor": {"type": "number"}
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "properties": {
+    "direcciones": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/direccion"
+      }
+    },
+    "establecimientos": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/establecimiento"
+      }
+    },
+    "categorias": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/categoria"
+      }
+    },
+    "productos": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/producto"
+      }
+    },
+    "inventario": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/inventario"
+      }
+    },
+    "clientes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/cliente"
+      }
+    },
+    "ventas": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/venta"
+      }
+    }
   }
 }

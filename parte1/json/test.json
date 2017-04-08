@@ -1,68 +1,27 @@
-{
-  "validateType1": "a string",
-  "validateType2": true,
-  "validateType3": 6,
-  "validateType4": 6,
-  "validateProperties": {
-    "a": [],
-    "b": 6
+[
+  {
+    "id": 2,
+    "name": "An ice sculpture",
+    "price": 12.50,
+    "tags": ["cold", "ice"],
+    "dimensions": {
+      "length": 7.0,
+      "width": 12.0,
+      "height": 9.5
+    }
   },
-  "validatePatternProperties": {
-    "x11": [],
-    "abc": 5
-  },
-  "validateAdditionalProperties1": {
-    "a": [],
-    "bcd": 4,
-    "11": true
-  },
-  "validateAdditionalProperties2": {
-    "a": [],
-    "bcd": 4
-  },
-  "validateNumberOfProperties": {
-    "abc": "a string"
-  },
-  "validateRequired": 6,
-  "validateRequiredProperties1": {
-    "propA": 6,
-    "propB": "a string"
-  },
-  "validateRequiredProperties2": {
-    "propA": 6,
-    "propB": "a string"
-  },
-  "validateItems": [
-    "str-a",
-    "str-b"
-  ],
-  "validateNumberOfItems": [
-    "str-a"
-  ],
-  "validateUniqueItems": [
-    "str-a",
-    "str-b"
-  ],
-  "validateNumber": 9.6,
-  "validateInteger": 8,
-  "validatePattern1": "a string",
-  "validatePattern2": "a string",
-  "validateFormat": "blue",
-  "validateLength": "a",
-  "validateEnum": {
-    "x": 11
-  },
-  "validateDependencies1": {
-    "a": "a string",
-    "b": true
-  },
-  "validateDependencies2": {
-    "a": "a string",
-    "b": true,
-    "c": 8
-  },
-  "validateAnyOf": "a string",
-  "validateAllOf": true,
-  "validateOneOf": 6,
-  "validateReference": "a string"
-}
+  {
+    "id": 3,
+    "name": "A blue mouse",
+    "price": 25.50,
+    "dimensions": {
+      "length": 3.1,
+      "width": 1.0,
+      "height": 1.0
+    },
+    "warehouseLocation": {
+      "latitude": 54.4,
+      "longitude": -32.7
+    }
+  }
+]
