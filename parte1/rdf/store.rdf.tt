@@ -1,0 +1,78 @@
+@prefix schema: <http://schema.org/> .
+@prefix ex: <http://quena-mti.bastian.info/rdf/> .
+
+<http://quena-mti.bastian.info/rdf>
+  schema:PostalAddress <http://quena-mti.bastian.info/rdf/direccion/id-101> ;
+  schema:Place <http://quena-mti.bastian.info/rdf/establecimiento/id-201> ;
+  schema:category <http://quena-mti.bastian.info/rdf/categoria/id-301> ;
+  schema:Product <http://quena-mti.bastian.info/rdf/producto/id-401> ;
+  schema:IndividualProduct <http://quena-mti.bastian.info/rdf/inventario/id-401> ;
+  schema:Person <http://quena-mti.bastian.info/rdf/categoria/id-601> ;
+  schema:Order <http://quena-mti.bastian.info/rdf/categoria/id-701> .
+
+<http://quena-mti.bastian.info/rdf/direccion/id-101>
+  ex:storeclass "Direccion" ;
+  schema:addressCountry "Chile" ;
+  schema:addressRegion "RM" ;
+  schema:addressLocality "Santiago" ;
+  schema:streetAddress "Calle Falsa 123" ;
+  schema:postalCode "1111111" ;
+  schema:GeoCoordinates schema:GeoCoordinates .
+
+schema:GeoCoordinates
+  schema:longitude "123" ;
+  schema:latitude "456" .
+
+<http://quena-mti.bastian.info/rdf/establecimiento/id-201>
+  ex:storeclass "Establecimiento" ;
+  schema:name "Audiomusica" ;
+  schema:PostalAddress <http://quena-mti.bastian.info/rdf/direccion/id-101> .
+
+<http://quena-mti.bastian.info/rdf/categoria/id-301>
+  ex:storeclass "Categoria" ;
+  schema:name "Cuerdas" ;
+  schema:description "Instrumentos de cuerdas con caja de resonancia" ;
+  schema:category <http://quena-mti.bastian.info/rdf/categoria/id-301> .
+
+<http://quena-mti.bastian.info/rdf/producto/id-401>
+  ex:storeclass "Producto" ;
+  schema:productID "G123456" ;
+  schema:name "Guitarra electrica" ;
+  schema:brand "Ibanez" ;
+  schema:model "G1" ;
+  schema:description "Guitarra de 6 cuerdas estilo stratocaster" ;
+  schema:additionalProperty schema:additionalProperty .
+
+schema:additionalProperty
+  schema:name "origen", "color", "tipo cuerda", "numero cuerdas" ;
+  schema:value "Europa occidental", "negro", "steel", "6" .
+
+<http://quena-mti.bastian.info/rdf/inventario/id-401>
+  ex:storeclass "Inventario" ;
+  schema:serialNumber "123456789" ;
+  schema:price "10000.0" ;
+  schema:priceCurrency "CLP" ;
+  schema:status "ingreso" ;
+  schema:dateModified "2017-01-01" ;
+  schema:Product <http://quena-mti.bastian.info/rdf/producto/id-401> ;
+  schema:Place <http://quena-mti.bastian.info/rdf/establecimiento/id-201> .
+
+<http://quena-mti.bastian.info/rdf/categoria/id-601>
+  ex:storeclass "Cliente" ;
+  schema:name "Juan" ;
+  schema:familyName "Gonzalez" ;
+  schema:email "juan@example.com" ;
+  schema:startDate "2017-01-01" ;
+  schema:status "activo" .
+
+<http://quena-mti.bastian.info/rdf/categoria/id-701>
+  ex:storeclass "Venta" ;
+  schema:orderNumber "id-701" ;
+  schema:orderDate "2016-12-25T08:30:00" ;
+  schema:orderStatus "terminado" ;
+  schema:Place <http://quena-mti.bastian.info/rdf/establecimiento/id-201> ;
+  schema:customer <http://quena-mti.bastian.info/rdf/cliente/id-601> ;
+  schema:acceptedOffer <http://quena-mti.bastian.info/rdf/categoria/id-701> ;
+  schema:itemOffered <http://quena-mti.bastian.info/rdf/producto/id-501> ;
+  schema:price "20000.0" ;
+  schema:priceCurrency "CLP" .

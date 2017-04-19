@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml 
+  xmlns:ex="http://www.example.org/store"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.example.org/store store2.xsd ">
+
+  <ex:direccion class="Direccion" id="id-101">
+    <ex:pais>Chile</ex:pais>
+    <ex:region>RM</ex:region>
+    <ex:ciudad>Santiago</ex:ciudad>
+    <ex:descripcion>Calle Falsa 123</ex:descripcion>
+    <ex:zipcode>1111111</ex:zipcode>
+    <ex:geo lat="123" lon="456" />
+  </ex:direccion>
+
+</xml>

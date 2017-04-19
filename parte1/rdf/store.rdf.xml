@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<rdf:RDF 
+    xmlns:ex="http://www.example.org/store" 
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" 
+    xmlns:sch="http://schema.org/">
+    <rdf:Description rdf:about="http://quena-mti.bastian.info/rdf">
+        <sch:PostalAddress>
+            <rdf:Description rdf:about="http://quena-mti.bastian.info/rdf/direccion/id-101">
+                <ex:class>Direccion</ex:class>
+                <sch:addressCountry>Chile</sch:addressCountry>
+                <sch:addressRegion>RM</sch:addressRegion>
+                <sch:addressLocality>Santiago</sch:addressLocality>
+                <sch:streetAddress>Calle Falsa 123</sch:streetAddress>
+                <sch:postalCode>1111111</sch:postalCode>
+                <sch:GeoCoordinates>
+                    <rdf:Description rdf:about="http://schema.org/GeoCoordinates">
+                        <sch:longitude>123</sch:longitude>
+                        <sch:latitude>456</sch:latitude>
+                    </rdf:Description>
+                </sch:GeoCoordinates>
+            </rdf:Description>
+        </sch:PostalAddress>
+        <sch:Place>
+            <rdf:Description rdf:about="http://quena-mti.bastian.info/rdf/establecimiento/id-201">
+                <ex:class>Establecimiento</ex:class>
+                <sch:name>Audiomusica</sch:name>
+                <sch:PostalAddress>
+                    <rdf:Description rdf:about="http://quena-mti.bastian.info/rdf/direccion/id-101"/>
+                </sch:PostalAddress>
+            </rdf:Description>
+        </sch:Place>
+        <sch:category>
+            <rdf:Description rdf:about="http://quena-mti.bastian.info/rdf/categoria/id-301">
+                <ex:class>Categoria</ex:class>
+                <sch:name>Cuerdas</sch:name>
+                <sch:description>Instrumentos de cuerdas con caja de resonancia</sch:description>
+                <sch:category>
+                    <rdf:Description rdf:about="http://quena-mti.bastian.info/rdf/categoria/id-301"/>
+                </sch:category>
+            </rdf:Description>
+        </sch:category>
+        <sch:Product>
+            <rdf:Description rdf:about="http://quena-mti.bastian.info/rdf/producto/id-401">
+                <ex:class>Producto</ex:class>
+                <sch:productID>G123456</sch:productID>
+                <sch:name>Guitarra electrica</sch:name>
+                <sch:brand>Ibanez</sch:brand>
+                <sch:model>G1</sch:model>
+                <sch:description>Guitarra de 6 cuerdas estilo stratocaster</sch:description>
+                <sch:additionalProperty>
+                    <rdf:Description rdf:about="http://schema.org/additionalProperty">
+                        <sch:name>origen</sch:name>
+                        <sch:value>Europa occidental</sch:value>
+                    </rdf:Description>
+                </sch:additionalProperty>
+                <sch:additionalProperty>
+                    <rdf:Description rdf:about="http://schema.org/additionalProperty">
+                        <sch:name>color</sch:name>
+                        <sch:value>negro</sch:value>
+                    </rdf:Description>
+                </sch:additionalProperty>
+                <sch:additionalProperty>
+                    <rdf:Description rdf:about="http://schema.org/additionalProperty">
+                        <sch:name>tipo cuerda</sch:name>
+                        <sch:value>steel</sch:value>
+                    </rdf:Description>
+                </sch:additionalProperty>
+                <sch:additionalProperty>
+                    <rdf:Description rdf:about="http://schema.org/additionalProperty">
+                        <sch:name>numero cuerdas</sch:name>
+                        <sch:value>6</sch:value>
+                    </rdf:Description>
+                </sch:additionalProperty>
+            </rdf:Description>
+        </sch:Product>
+        <sch:IndividualProduct>
+            <rdf:Description rdf:about="http://quena-mti.bastian.info/rdf/inventario/id-401">
+                <ex:class>Inventario</ex:class>
+                <sch:serialNumber>123456789</sch:serialNumber>
+                <sch:price>10000.0</sch:price>
+                <sch:priceCurrency>CLP</sch:priceCurrency>
+                <sch:status>ingreso</sch:status>
+                <sch:dateModified>2017-01-01</sch:dateModified>
+                <sch:Product>
+                    <rdf:Description rdf:about="http://quena-mti.bastian.info/rdf/producto/id-401"/>
+                </sch:Product>
+                <sch:Place>
+                    <rdf:Description rdf:about="http://quena-mti.bastian.info/rdf/establecimiento/id-201"/>
+                </sch:Place>
+            </rdf:Description>
+        </sch:IndividualProduct>
+        <sch:Person>
+            <rdf:Description rdf:about="http://quena-mti.bastian.info/rdf/categoria/id-601">
+                <ex:class>Cliente</ex:class>
+                <sch:name>Juan</sch:name>
+                <sch:familyName>Gonzalez</sch:familyName>
+                <sch:email>juan@example.com</sch:email>
+                <sch:startDate>2017-01-01</sch:startDate>
+                <sch:status>activo</sch:status>
+            </rdf:Description>
+        </sch:Person>
+        <sch:Order>
+            <rdf:Description rdf:about="http://quena-mti.bastian.info/rdf/categoria/id-701">
+                <ex:class>Venta</ex:class>
+                <sch:orderNumber>id-701</sch:orderNumber>
+                <sch:orderDate>2016-12-25T08:30:00</sch:orderDate>
+                <sch:orderStatus>terminado</sch:orderStatus>
+                <sch:Place>
+                    <rdf:Description rdf:about="http://quena-mti.bastian.info/rdf/establecimiento/id-201"/>
+                </sch:Place>
+                <sch:customer>
+                    <rdf:Description rdf:about="http://quena-mti.bastian.info/rdf/cliente/id-601"/>
+                </sch:customer>
+                <sch:acceptedOffer>
+                    <rdf:Description rdf:about="http://quena-mti.bastian.info/rdf/categoria/id-701">
+                        <sch:itemOffered>
+                            <rdf:Description rdf:about="http://quena-mti.bastian.info/rdf/producto/id-501"/>
+                        </sch:itemOffered>
+                        <sch:price>20000.0</sch:price>
+                        <sch:priceCurrency>CLP</sch:priceCurrency>
+                    </rdf:Description>
+                </sch:acceptedOffer>
+            </rdf:Description>
+        </sch:Order>
+    </rdf:Description>
+</rdf:RDF>

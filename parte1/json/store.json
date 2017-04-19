@@ -2,7 +2,7 @@
   "direcciones": [
     {
       "_class": "Direccion",
-      "_id": 1,
+      "_id": "1",
       "pais": "string",
       "region": "string",
       "ciudad": "string",
@@ -17,11 +17,11 @@
   "establecimientos": [
     {
       "_class": "Establecimiento",
-      "_id": 2,
+      "_id": "2",
       "nombre": "string",
       "direccion": {
         "_class": "Direccion",
-        "_id": 1,
+        "_id": "1",
         "pais": "string",
         "region": "string",
         "ciudad": "string",
@@ -37,7 +37,7 @@
   "categorias": [
     {
       "_class": "Categoria",
-      "_id": 3,
+      "_id": "3",
       "nombre": "string",
       "descripcion": "string",
       "categoriaPadre": null
@@ -46,7 +46,7 @@
   "productos": [
     {
       "_class": "Producto",
-      "_id": 4,
+      "_id": "4",
       "codigo": {"tipo": "string", "valor": "string"},
       "nombre": "string",
       "marca": "string",
@@ -56,7 +56,7 @@
       "categorias": [
         {
           "_class": "Categoria",
-          "_id": 3,
+          "_id": "3",
           "nombre": "string",
           "descripcion": "string",
           "categoriaPadre": null
@@ -71,14 +71,15 @@
   "inventario": [
     {
       "_class": "Inventario",
-      "_id": 5,
+      "_id": "5",
+      "nombre": "string",
       "establecimiento": {
         "_class": "Establecimiento",
-        "_id": 2,
+        "_id": "2",
         "nombre": "string",
         "direccion": {
           "_class": "Direccion",
-          "_id": 1,
+          "_id": "1",
           "pais": "string",
           "region": "string",
           "ciudad": "string",
@@ -92,7 +93,7 @@
       },
       "producto": {
         "_class": "Producto",
-        "_id": 4,
+        "_id": "4",
         "codigo": {"tipo": "string", "valor": "string"},
         "nombre": "string",
         "marca": "string",
@@ -102,7 +103,7 @@
         "categorias": [
           {
             "_class": "Categoria",
-            "_id": 3,
+            "_id": "3",
             "nombre": "string",
             "descripcion": "string",
             "categoriaPadre": null
@@ -122,7 +123,7 @@
   "clientes": [
     {
       "_class": "Cliente",
-      "_id": 5,
+      "_id": "5",
       "nombre": "string",
       "apellido": "string",
       "email": "string",
@@ -133,7 +134,7 @@
   "ventas": [
     {
       "_class": "Venta",
-      "_id": 5,
+      "_id": "5",
       "establecimiento": {"_class": "Establecimiento", "_ref": 2},
       "cliente": {"_class": "Cliente", "_ref": 2},
       "pago": {"moneda": "string", "valor": 1000.0},
@@ -141,7 +142,56 @@
       "fecha_venta": "2017-01-01",
       "items": [
         {
-          "inventario": {"_class": "Inventario", "_ref": 2},
+          "inventario": {
+            "_class": "Inventario",
+            "_id": "5",
+            "nombre": "string",
+            "establecimiento": {
+              "_class": "Establecimiento",
+              "_id": "2",
+              "nombre": "string",
+              "direccion": {
+                "_class": "Direccion",
+                "_id": "1",
+                "pais": "string",
+                "region": "string",
+                "ciudad": "string",
+                "descripcion": "string",
+                "zipcode": 123,
+                "geo": {
+                  "lat": 1.0,
+                  "lon": 2.0
+                }
+              }
+            },
+            "producto": {
+              "_class": "Producto",
+              "_id": "4",
+              "codigo": {"tipo": "string", "valor": "string"},
+              "nombre": "string",
+              "marca": "string",
+              "modelo": "string",
+              "descripcion": "string",
+              "origen": "string",
+              "categorias": [
+                {
+                  "_class": "Categoria",
+                  "_id": "3",
+                  "nombre": "string",
+                  "descripcion": "string",
+                  "categoriaPadre": null
+                }
+              ],
+              "caracteristicas": [
+                {"nombre": "color", "valor": "string"},
+                {"nombre": "tamano", "valor": "string"}
+              ]
+            },
+            "codigo": {"tipo": "string", "valor": "string"},
+            "precio": {"moneda": "string", "valor": 1000.0},
+            "estado": "string",
+            "fecha_actualizado": "2017-01-01"
+          },
           "precio": {"moneda": "string", "valor": 1000.0}
         }
       ]

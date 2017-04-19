@@ -1,0 +1,21 @@
+{
+  "name": "rdf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "libxslt": "^0.6.5",
+    "rdf-ext": "^0.3.0",
+    "rdf-parser-rdfxml": "^0.3.1",
+    "rdf-serializer-ntriples": "^0.3.0",
+    "rdflib": "^0.15.0",
+    "string-to-stream": "^1.1.0",
+    "turtle-validator": "^1.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

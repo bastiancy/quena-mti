@@ -75,7 +75,10 @@
           "type": "string"
         },
         "categoriaPadre": {
-          "$ref": "#/definitions/categoria"
+          "oneOf": [
+            {"type": "null"},
+            {"$ref": "#/definitions/categoria"}
+          ]
         }
       },
       "required": ["_class", "_id", "nombre"]
@@ -167,7 +170,8 @@
           "type": "string"
         },
         "fecha_actualizado": {
-          "type": "date"
+          "type": "string",
+          "format": "date"
         }
       },
       "required": ["_class", "_id", "nombre", "codigo"]
@@ -193,7 +197,8 @@
           "type": "string"
         },
         "fecha_registro": {
-          "type": "date"
+          "type": "string",
+          "format": "date"
         },
         "estado": {
           "type": "string"
@@ -228,7 +233,8 @@
           "type": "string"
         },
         "fecha_venta": {
-          "type": "string"
+          "type": "string",
+          "format": "date"
         },
         "items": {
           "type": "array",

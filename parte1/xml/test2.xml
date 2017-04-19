@@ -2,7 +2,7 @@
 <Fleet shipperName="Shipper1" 
     xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-    xsi:noNamespaceSchemaLocation="car.xsd">
+    xsi:noNamespaceSchemaLocation="test2.xsd">
 
     <Car id="car1">
         <plate>AAA</plate>
