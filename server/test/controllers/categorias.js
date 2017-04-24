@@ -58,20 +58,21 @@ describe('controllers', function() {
 
     });
 
-    describe('GET /categorias/categoriaId', function() {
+    describe('GET /categorias/{categoriaId}', function() {
 
-      it('should accept a name parameter', function(done) {
+      it('should return an object by its id', function(done) {
+        var id = '58dacc09ae99b5415be48314';
 
         request(server)
-          .get('/categorias')
-          .query({ categoiaId: '1'})
+          .get('/categorias/' + id)
           .set('Accept', 'application/json')
           .expect('Content-Type', /json/)
           .expect(200)
           .end(function(err, res) {
             should.not.exist(err);
 
-            res.body.should.length(3);
+            should.exist(res.body.id);
+            res.body.id.should.equal(id);
 
             done();
           });

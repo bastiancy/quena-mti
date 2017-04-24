@@ -5,10 +5,8 @@ const accepts = require('accepts');
 const jstoxml = require('../helpers/js2xml');
 const Establecimiento = require('../models/establecimiento');
 
-module.exports.findAllInventarioInEstablecimiento = function(req, res, next) {
-    let establecimientoId = req.swagger.params.establecimientoId.value;
-
-    Establecimiento.find({'establecimientoId': establecimientoId}, function (err, data) {
+module.exports.findAllEstablecimiento = function(req, res, next) {
+    Establecimiento.find(function (err, data) {
         let accept = accepts(req);
         let result = null;
 
@@ -37,7 +35,7 @@ module.exports.findAllInventarioInEstablecimiento = function(req, res, next) {
     });
 };
 
-module.exports.findOneInventarioInEstablecimiento = function(req, res, next) {
+module.exports.findOneEstablecimiento = function(req, res, next) {
     let establecimientoId = req.swagger.params.establecimientoId.value;
 
     Establecimiento.findById(establecimientoId, function(err, data) {
@@ -69,12 +67,12 @@ module.exports.findOneInventarioInEstablecimiento = function(req, res, next) {
     });
 };
 
-module.exports.addInventarioInEstablecimiento = function(req, res, next) {
+module.exports.addEstablecimiento = function(req, res, next) {
     let body = req.swagger.params.body.value;
 
     let item = new Establecimiento();
     item.nombre = body.nombre;
-    item.establecimiento = body.establecimiento;
+    item.descripcion = body.descripcion;
 
     item.save(function (err) {
         if (err) {
@@ -87,7 +85,7 @@ module.exports.addInventarioInEstablecimiento = function(req, res, next) {
     });
 };
 
-module.exports.updateInventarioInEstablecimiento = function(req, res) {
+module.exports.updateEstablecimiento = function(req, res) {
     var establecimientoId = req.swagger.params.establecimientoId.value;
     var body = req.swagger.params.body.value;
 
@@ -111,7 +109,7 @@ module.exports.updateInventarioInEstablecimiento = function(req, res) {
     });
 };
 
-module.exports.renoveInventarioInEstablecimiento = function(req, res) {
+module.exports.removeEstablecimiento = function(req, res) {
     var establecimientoId = req.swagger.params.establecimientoId.value;
 
     Establecimiento.remove({

@@ -1,0 +1,34 @@
+<h2>Establecimiento</h2>
+<div>
+    <p>Agregar una Establecimiento</p>
+    <div>
+        <label>Nombre:</label> <input #establecimientoNombre />
+    </div>
+    <div>
+        <label>Descripcion:</label> <textarea #establecimientoDescripcion></textarea>
+    </div>
+    <button (click)="add(establecimientoNombre.value, establecimientoDescripcion.value); establecimientoNombre.value=''; establecimientoDescripcion.value=''">
+        Add
+    </button>
+</div>
+<br>
+<div class="establecimiento">
+    <p>Listado de Establecimiento</p>
+    <table>
+        <tr>
+            <th>id</th>
+            <th>nombre</th>
+            <th>descripcion</th>
+            <th>opciones</th>
+        </tr>
+        <tr *ngFor="let est of establecimientos">
+            <td>{{est.id}}</td>
+            <td>{{est.nombre}}</td>
+            <td>
+                <button (click)="gotoDetail(est);">View</button>
+                <button class="delete" (click)="delete(est); $event.stopPropagation()">x</button>
+            </td>
+        </tr>
+
+    </table>
+</div>

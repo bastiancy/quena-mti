@@ -6,7 +6,7 @@ const jstoxml = require('../helpers/js2xml');
 const Producto = require('../models/producto');
 
 module.exports.findAllProducto = function(req, res, next) {
-    Producto.find(function (err, items) {
+    Producto.find(function (err, data) {
         let accept = accepts(req);
         let result = null;
 
@@ -36,91 +36,99 @@ module.exports.findAllProducto = function(req, res, next) {
 };
 
 module.exports.findOneProducto = function(req, res, next) {
-    var productoId = req.swagger.params.productoId.value;
+    let productoId = req.swagger.params.productoId.value;
 
     Producto.findById(productoId, function(err, data) {
-        var params = req.swagger.params;
-        var accept = accepts(req);
+        let accept = accepts(req);
+        let result = null;
 
         if (err) {
-            next(err);
+            return next(new Error(err));
         }
 
         switch(accept.type(['json', 'xml', 'html'])) {
             case 'xml':
-                data = {'Producto': data};
-                jstoxml.jsonToXml(JSON.stringify(data), null, function (err2, result) {
-                    if (err2) {
-                        next(err2);
-                    }
-
-                    res.write(result);
-                });
+                result = Producto.toXml(data, false);
+                res.setHeader('Content-Type', 'application/xml');
+                res.end(result);
                 break;
             case 'html':
-                var all = data.map(function(d) { return '<p>' + d._id + ': ' + d.nombre + '</p>'; });
-                res.write('<html>' + all.join('') + '</html>');
+                result = Producto.toHtml(data, false);
+                res.setHeader('Content-Type', 'text/html');
+                res.end(result);
                 break;
             default:
                 // fallback to json
+                result = Producto.toJson(data);
                 res.setHeader('Content-Type', 'application/json');
-                res.end(JSON.stringify(data, null, 2));
+                res.end(result);
                 break;
         }
-
-        res.end();
     });
 };
 
-function addProducto(req, res) {
-    var body = req.swagger.params.body.value;
+module.exports.addProducto = function(req, res, next) {
+    let body = req.swagger.params.body.value;
 
-    var prod = new Producto(body);
-    prod.save(function (err) {
-        if (err)
-            res.send(err);
+    let item = new Producto();
+    item.nombre = body.nombre;
+    item.descripcion = body.descripcion;
 
-        res.json(prod);
+    item.save(function (err) {
+        if (err) {
+            return next(new Error(err));
+        }
+
+        let result = Producto.toJson(item);
+        res.setHeader('Content-Type', 'application/json');
+        res.end(result);
     });
-}
+};
 
-function updateProducto(req, res) {
+module.exports.updateProducto = function(req, res) {
     var productoId = req.swagger.params.productoId.value;
     var body = req.swagger.params.body.value;
 
-    Producto.findById(productoId, function(err, prod) {
-        if (err)
-            res.send(err);
+    Producto.findById(productoId, function(err, item) {
+        if (err) {
+            return next(new Error(err));
+        }
 
-        prod.nombre = body.nombre;  // update the bears info
+        item.nombre = body.nombre;
+        item.descripcion = body.descripcion;
 
         // save the bear
-        prod.save(function(err) {
-            if (err)
-                res.send(err);
+        item.save(function(err) {
+            if (err) {
+                return next(new Error(err));
+            }
 
-            res.json(prod);
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify('updated id: ' + productoId));
         });
     });
-}
+};
 
-function removeProducto(req, res) {
+module.exports.removeProducto = function(req, res) {
     var productoId = req.swagger.params.productoId.value;
 
     Producto.remove({
         _id: productoId
-    }, function(err, bear) {
-        if (err)
-            res.send(err);
+    }, function(err, item) {
+        if (err) {
+            return next(new Error(err));
+        }
 
-        res.json({ id: productoId });
+        let result = Producto.toJson(item);
+        res.setHeader('Content-Type', 'application/json');
+        res.end(result);
     });
-}
+};
 
-function findAllProductoInStore(req, res) {
-    res.send();
-}
+module.exports.findAllProductoInStore = function(req, res) {
+    res.send(new Error('findAllProductoInStore not implemented!'));
+};
 
-function findOneProductoInStore(req, res) {
-    res.send();
-}
+module.exports.findOneProductoInStore = function(req, res) {
+    res.send(new Error('findOneProductoInStore not implemented!'));
+};

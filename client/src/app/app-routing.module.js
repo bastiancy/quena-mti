@@ -12,13 +12,21 @@ var heroes_component_1 = require("./heroes/heroes.component");
 var hero_detail_component_1 = require("./heroes/hero-detail.component");
 var categorias_component_1 = require("./categorias/categorias.component");
 var categoria_detail_component_1 = require("./categorias/categoria-detail.component");
+var productos_component_1 = require("./productos/productos.component");
+var producto_detail_component_1 = require("./productos/producto-detail.component");
+var establecimientos_component_1 = require("./establecimientos/establecimientos.component");
+var establecimiento_detail_component_1 = require("./establecimientos/establecimiento-detail.component");
 var routes = [
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
     { path: 'dashboard', component: dashboard_component_1.DashboardComponent },
     { path: 'detail/:id', component: hero_detail_component_1.HeroDetailComponent },
     { path: 'heroes', component: heroes_component_1.HeroesComponent },
     { path: 'categorias/detail/:id', component: categoria_detail_component_1.CategoriaDetailComponent },
-    { path: 'categorias', component: categorias_component_1.CategoriasComponent }
+    { path: 'categorias', component: categorias_component_1.CategoriasComponent },
+    { path: 'productos/detail/:id', component: producto_detail_component_1.ProductoDetailComponent },
+    { path: 'productos', component: productos_component_1.ProductosComponent },
+    { path: 'establecimientos/detail/:id', component: establecimiento_detail_component_1.EstablecimientoDetailComponent },
+    { path: 'establecimientos', component: establecimientos_component_1.EstablecimientosComponent },
 ];
 var AppRoutingModule = (function () {
     function AppRoutingModule() {

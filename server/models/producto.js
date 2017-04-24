@@ -21,14 +21,14 @@ ProductoSchema.statics.toJson = function (data) {
         return {
             '_class': 'Producto',
             'id': item._id,
-            'codigo': {'tipo': item.codigo.tipo, 'valor': item.codigo.valor},
+            'codigo': (item.codigo ? {'tipo': item.codigo.tipo, 'valor': item.codigo.valor} : null),
             'nombre': item.nombre,
             'marca': item.marca,
             'modelo': item.modelo,
             'descripcion': item.descripcion,
             'origen': item.origen,
             'categorias': null,
-            'caracteristicas': item.origen,
+            'caracteristicas': null,
         };
     };
 

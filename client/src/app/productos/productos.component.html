@@ -1,0 +1,37 @@
+<h2>Productos</h2>
+<div>
+    <p>Agregar una Producto</p>
+    <div>
+        <label>Nombre:</label> <input #productoNombre />
+    </div>
+    <div>
+        <label>Descripcion:</label> <textarea #productoDescripcion></textarea>
+    </div>
+    <button (click)="add(productoNombre.value, productoDescripcion.value); productoNombre.value=''; productoDescripcion.value=''">
+        Add
+    </button>
+</div>
+<br>
+<div class="productos">
+    <p>Listado de Productos</p>
+    <table>
+        <tr>
+            <th>id</th>
+            <th>nombre</th>
+            <th>marca</th>
+            <th>modelo</th>
+            <th>opciones</th>
+        </tr>
+        <tr *ngFor="let producto of productos">
+            <td>{{producto.id}}</td>
+            <td>{{producto.nombre}}</td>
+            <td>{{producto.marca}}</td>
+            <td>{{producto.modelo}}</td>
+            <td>
+                <button (click)="gotoDetail(producto);">View</button>
+                <button class="delete" (click)="delete(producto); $event.stopPropagation()">x</button>
+            </td>
+        </tr>
+
+    </table>
+</div>

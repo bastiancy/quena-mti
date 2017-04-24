@@ -15,59 +15,59 @@ var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 require("rxjs/add/operator/toPromise");
 var app_config_constants_1 = require("../app-config.constants");
-var CategoriaService = (function () {
-    function CategoriaService(http, config) {
+var EstablecimientoService = (function () {
+    function EstablecimientoService(http, config) {
         this.http = http;
         this.config = config;
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        this.categoriasUrl = this.config.API_ENDPOINT + '/categorias';
+        this.establecimientosUrl = this.config.API_ENDPOINT + '/establecimientos';
     }
-    CategoriaService.prototype.getCategorias = function () {
-        return this.http.get(this.categoriasUrl)
+    EstablecimientoService.prototype.getEstablecimientos = function () {
+        return this.http.get(this.establecimientosUrl)
             .toPromise()
             .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };
-    CategoriaService.prototype.handleError = function (error) {
+    EstablecimientoService.prototype.handleError = function (error) {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);
     };
-    CategoriaService.prototype.getCategoria = function (id) {
-        var url = this.categoriasUrl + "/" + id;
+    EstablecimientoService.prototype.getEstablecimiento = function (id) {
+        var url = this.establecimientosUrl + "/" + id;
         return this.http.get(url)
             .toPromise()
             .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };
-    CategoriaService.prototype.update = function (categoria) {
-        var url = this.categoriasUrl + "/" + categoria.id;
+    EstablecimientoService.prototype.update = function (establecimiento) {
+        var url = this.establecimientosUrl + "/" + establecimiento.id;
         return this.http
-            .put(url, JSON.stringify(categoria), { headers: this.headers })
+            .put(url, JSON.stringify(establecimiento), { headers: this.headers })
             .toPromise()
-            .then(function () { return categoria; })
+            .then(function () { return establecimiento; })
             .catch(this.handleError);
     };
-    CategoriaService.prototype.create = function (nombre, descripcion) {
+    EstablecimientoService.prototype.create = function (nombre, descripcion) {
         return this.http
-            .post(this.categoriasUrl, JSON.stringify({ nombre: nombre, descripcion: descripcion }), { headers: this.headers })
+            .post(this.establecimientosUrl, JSON.stringify({ nombre: nombre, descripcion: descripcion }), { headers: this.headers })
             .toPromise()
             .then(function (res) { return res.json(); })
             .catch(this.handleError);
     };
-    CategoriaService.prototype.delete = function (id) {
-        var url = this.categoriasUrl + "/" + id;
+    EstablecimientoService.prototype.delete = function (id) {
+        var url = this.establecimientosUrl + "/" + id;
         return this.http
             .delete(url, { headers: this.headers })
             .toPromise()
             .then(function () { return null; })
             .catch(this.handleError);
     };
-    return CategoriaService;
+    return EstablecimientoService;
 }());
-CategoriaService = __decorate([
+EstablecimientoService = __decorate([
     core_1.Injectable(),
     __param(1, core_1.Inject(app_config_constants_1.APP_CONFIG)),
     __metadata("design:paramtypes", [http_1.Http, Object])
-], CategoriaService);
-exports.CategoriaService = CategoriaService;
-//# sourceMappingURL=categoria.service.js.map
+], EstablecimientoService);
+exports.EstablecimientoService = EstablecimientoService;
+//# sourceMappingURL=establecimiento.service.js.map

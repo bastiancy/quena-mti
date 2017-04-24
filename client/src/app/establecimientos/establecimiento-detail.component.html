@@ -1,0 +1,16 @@
+<div *ngIf="establecimiento">
+    <h2>{{establecimiento.nombre}} details!</h2>
+    <div>
+        <label>id: </label>{{establecimiento.id}}
+    </div>
+    <div>
+        <label>nombre: </label>
+        <input [(ngModel)]="establecimiento.nombre" placeholder="nombre" />
+    </div>
+    <div>
+        <label>inventario: </label>
+        <div>...</div>
+    </div>
+    <button (click)="goBack()">Back</button>
+    <button (click)="save()">Save</button>
+</div>

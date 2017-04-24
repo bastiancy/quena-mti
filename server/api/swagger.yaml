@@ -7,7 +7,7 @@ info:
   title: Quena Store
   contact:
     name: bastian.carvajal@sansano.usm.cl
-host: api.quena.mti.dokku.me
+host: localhost:5000
 basePath: /
 schemes:
   - http
@@ -253,10 +253,10 @@ paths:
         "400":
           description: Invalid ID supplied
 
-  /stores:
-    x-swagger-router-controller: stores
+  /establecimientos:
+    x-swagger-router-controller: establecimientos
     get:
-      operationId: findAllStore
+      operationId: findAllEstablecimiento
       summary: Lista todos los establecimientos
       description: Devuelve listado de Establecimientos
       produces:
@@ -271,7 +271,7 @@ paths:
             items:
               $ref: "#/definitions/Establecimiento"
     post:
-      operationId: addStore
+      operationId: addEstablecimiento
       summary: Crea un nuevo Establecimiento
       description: Crea un Establecimiento al completar a traves de un formulario / json, devuelve el Establecimiento
       consumes:
@@ -295,10 +295,10 @@ paths:
         "405":
           description: Validation exception
 
-  /stores/{storeId}:
-    x-swagger-router-controller: stores
+  /establecimientos/{establecimientoId}:
+    x-swagger-router-controller: establecimientos
     get:
-      operationId: findOneStore
+      operationId: findOneEstablecimiento
       summary: Detalles de un establecimiento
       description: Devuelve un Establecimiento por su ID
       produces:
@@ -307,7 +307,7 @@ paths:
         - text/html
       parameters:
         - in: path
-          name: storeId
+          name: establecimientoId
           description: Establecimiento ID
           required: true
           type: string
@@ -319,10 +319,10 @@ paths:
         "404":
           description: Object not found
 
-  /stores/{storeId}/inventario:
+  /establecimientos/{establecimientoId}/inventario:
     x-swagger-router-controller: inventario
     get:
-      operationId: findAllInventarioInStore
+      operationId: findAllInventarioInEstablecimiento
       summary: Detalles de inventario
       description: Devuelve todo el inventario de un Establecimiento por su ID
       produces:
@@ -331,7 +331,7 @@ paths:
         - text/html
       parameters:
         - in: path
-          name: storeId
+          name: establecimientoId
           description: Establecimiento ID
           required: true
           type: string
@@ -345,7 +345,7 @@ paths:
         "404":
           description: Object not found
     post:
-      operationId: addInventarioInStore
+      operationId: addInventarioInEstablecimiento
       summary: Actualiza un Categoria
       description: Actualiza un Categoria a traves de un formulario / json, devuelve el Categoria
       consumes:
@@ -356,7 +356,7 @@ paths:
         - text/html
       parameters:
         - in: path
-          name: storeId
+          name: establecimientoId
           description: Establecimiento ID
           required: true
           type: string
@@ -378,10 +378,10 @@ paths:
         "400":
           description: Invalid ID supplied
 
-  /stores/{storeId}/inventario/{itemId}:
+  /establecimientos/{establecimientoId}/inventario/{itemId}:
     x-swagger-router-controller: inventario
     get:
-      operationId: findOneInventarioInStore
+      operationId: findOneInventarioInEstablecimiento
       summary: Detalles de un establecimiento
       description: Devuelve un Establecimiento por su ID
       produces:
@@ -390,7 +390,7 @@ paths:
         - text/html
       parameters:
         - in: path
-          name: storeId
+          name: establecimientoId
           description: Establecimiento ID
           required: true
           type: string
@@ -407,7 +407,7 @@ paths:
         "404":
           description: Object not found
     put:
-      operationId: updateInventarioInStore
+      operationId: updateInventarioInEstablecimiento
       summary: Actualiza un Inventario
       description: Actualiza un Inventario a traves de un formulario / json, devuelve el Inventario
       consumes:
@@ -418,7 +418,7 @@ paths:
         - text/html
       parameters:
         - in: path
-          name: storeId
+          name: establecimientoId
           description: Establecimiento ID
           required: true
           type: string
@@ -445,7 +445,7 @@ paths:
         "400":
           description: Invalid ID supplied
     delete:
-      operationId: renoveInventarioInStore
+      operationId: renoveInventarioInEstablecimiento
       summary: Elimina un Inventario
       description: Elimina un Inventario por ID
       produces:
@@ -454,7 +454,7 @@ paths:
         - text/html
       parameters:
         - in: path
-          name: storeId
+          name: establecimientoId
           description: Establecimiento ID
           required: true
           type: string
@@ -469,10 +469,10 @@ paths:
         "404":
           description: Inventario not found
 
-  /stores/{storeId}/productos:
+  /establecimientos/{establecimientoId}/productos:
     x-swagger-router-controller: productos
     get:
-      operationId: findAllProductoInStore
+      operationId: findAllProductoInEstablecimiento
       summary: Detalles de productos
       description: Devuelve todo los productos de un Establecimiento por su ID
       produces:
@@ -481,7 +481,7 @@ paths:
         - text/html
       parameters:
         - in: path
-          name: storeId
+          name: establecimientoId
           description: Establecimiento ID
           required: true
           type: string
@@ -495,10 +495,10 @@ paths:
         "404":
           description: Object not found
 
-  /stores/{storeId}/productos/{productoId}:
+  /establecimientos/{establecimientoId}/productos/{productoId}:
     x-swagger-router-controller: productos
     get:
-      operationId: findOneProductoInStore
+      operationId: findOneProductoInEstablecimiento
       summary: Detalles de un producto
       description: Devuelve un Producto en un Establecimiento por su ID
       produces:
@@ -507,7 +507,7 @@ paths:
         - text/html
       parameters:
         - in: path
-          name: storeId
+          name: establecimientoId
           description: Establecimiento ID
           required: true
           type: string
@@ -526,10 +526,10 @@ paths:
         "404":
           description: Object not found
 
-  /stores/{storeId}/ventas:
+  /establecimientos/{establecimientoId}/ventas:
     x-swagger-router-controller: ventas
     get:
-      operationId: findAllVentaInStore
+      operationId: findAllVentaInEstablecimiento
       summary: Listado de ventas en extablecimiento
       description: Devuelve todas las ventas de un Establecimiento por su ID
       produces:
@@ -538,7 +538,7 @@ paths:
         - text/html
       parameters:
         - in: path
-          name: storeId
+          name: establecimientoId
           description: Establecimiento ID
           required: true
           type: string
@@ -552,7 +552,7 @@ paths:
         "404":
           description: Object not found
     post:
-      operationId: addVentaInStore
+      operationId: addVentaInEstablecimiento
       summary: Agrega una Venta a un Establecimiento
       description: Crea una Venta, en un Establecimiento, a traves de un formulario / json, devuelve la Venta
       consumes:
@@ -563,7 +563,7 @@ paths:
         - text/html
       parameters:
         - in: path
-          name: storeId
+          name: establecimientoId
           description: Establecimiento ID
           required: true
           type: string
@@ -585,10 +585,10 @@ paths:
         "400":
           description: Invalid ID supplied
 
-  /stores/{storeId}/ventas/{ventaId}:
+  /establecimientos/{establecimientoId}/ventas/{ventaId}:
     x-swagger-router-controller: ventas
     get:
-      operationId: findOneVentaInStore
+      operationId: findOneVentaInEstablecimiento
       summary: Detalles de venta en extablecimiento
       description: Devuelve una Ventas de un Establecimiento por su ID
       produces:
@@ -597,7 +597,7 @@ paths:
         - text/html
       parameters:
         - in: path
-          name: storeId
+          name: establecimientoId
           description: Establecimiento ID
           required: true
           type: string
@@ -616,7 +616,7 @@ paths:
         "404":
           description: Object not found
     put:
-      operationId: updateVentaInStore
+      operationId: updateVentaInEstablecimiento
       summary: Actualiza una Venta de un Establecimiento
       description: Actualiza una Venta, de un Establecimiento, a traves de un formulario / json, devuelve la Venta
       consumes:
@@ -627,7 +627,7 @@ paths:
         - text/html
       parameters:
         - in: path
-          name: storeId
+          name: establecimientoId
           description: Establecimiento ID
           required: true
           type: string
