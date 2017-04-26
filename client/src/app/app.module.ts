@@ -46,7 +46,7 @@ import {EstablecimientoDetailComponent} from "./establecimientos/establecimiento
     ProductosComponent,
     ProductoDetailComponent,
     EstablecimientosComponent,
-    EstablecimientoDetailComponent,
+    EstablecimientoDetailComponent
   ],
   providers: [
       HeroService,

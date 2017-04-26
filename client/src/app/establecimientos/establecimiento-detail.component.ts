@@ -25,6 +25,10 @@ export class EstablecimientoDetailComponent implements OnInit {
             .subscribe(establecimiento => this.establecimiento = establecimiento);
     }
 
+    loadInventario(): void {
+
+    }
+
     goBack(): void {
         this.location.back();
     }

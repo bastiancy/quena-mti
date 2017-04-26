@@ -1,5 +1,5 @@
-import { InjectionToken } from "@angular/core";
-import { IAppConfig } from "./app-config.interface";
+import { InjectionToken } from '@angular/core';
+import { IAppConfig } from './app-config.interface';
 
 export const APP_DI_CONFIG: IAppConfig = {
 
