@@ -13,7 +13,8 @@ const ProductoSchema   = new Schema({
     descripcion: String,
     origen: String,
     categorias: [{type: mongoose.Schema.Types.ObjectId, ref: 'Categoria'}],
-    caracteristicas: [{nombre: String, valor: String}]
+    caracteristicas: [{nombre: String, valor: String}],
+    imagenes: [{url: String}]
 });
 
 ProductoSchema.statics.toJson = function (data) {
@@ -28,7 +29,8 @@ ProductoSchema.statics.toJson = function (data) {
             'descripcion': item.descripcion,
             'origen': item.origen,
             'categorias': null,
-            'caracteristicas': null,
+            'caracteristicas': item.caracteristicas,
+            'imagenes': item.imagenes,
         };
     };
 

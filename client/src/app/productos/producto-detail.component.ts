@@ -33,4 +33,12 @@ export class ProductoDetailComponent implements OnInit {
         this.productoService.update(this.producto)
             .then(() => this.goBack());
     }
+
+    delete(producto: Producto): void {
+      this.productoService
+        .delete(producto.id)
+        .then(() => {
+          this.goBack()
+        });
+    }
 }

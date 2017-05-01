@@ -1,24 +1,106 @@
 <div *ngIf="producto">
-    <h2>{{producto.nombre}} details!</h2>
-    <div>
-        <label>id: </label>{{producto.id}}
+
+  <div class="row">
+    <div class="col-md-9" style="border-right: 1px solid #e3e3e3;">
+      <h3>{{producto.nombre}}</h3>
+      <hr>
+      <div class="row">
+        <div class="col-md-7">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="img-thumbnail" style="display: block; overflow: hidden;">
+                <img *ngIf="producto.imagenes.length > 0" src="{{ producto.imagenes[0].url }}" class="img-responsive" alt="">
+                <img *ngIf="producto.imagenes.length <= 0" src="http://placehold.it/320x150" class="img-responsive" alt="">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div *ngFor="let imagen of producto.imagenes" class="img-thumbnail" style="width: 150px; height: 100px; margin-top: 10px; margin-right: 10px; display: inline-block; overflow: hidden;">
+                <img src="{{ imagen.url }}" class="img-responsive" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <br>
+          <p>
+            <b>Codigo: {{producto.id}}</b><br>
+            <b>Modelo: {{producto.modelo}}</b><br>
+            <b>Marca: {{producto.marca}}</b><br>
+            <b>Origen: {{producto.origen}}</b><br>
+          </p>
+          <p>{{producto.descripcion}}</p>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-7">
+          <div class="panel panel-default">
+            <div class="panel-heading">Caracteristicas</div>
+            <div class="panel-body">
+              <p *ngFor="let carac of producto.caracteristicas">
+                <b>{{carac.nombre}}</b><br>
+                {{carac.valor}}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="panel panel-default">
+            <div class="panel-heading">Stock en tiendas</div>
+            <table class="table">
+              <thead>
+              <tr>
+                <th>Establecimiento</th>
+                <th>Stock</th>
+                <th>Precio</th>
+                <th></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>Santaigo</td>
+                <td>2</td>
+                <td>CLP$ 15000</td>
+                <td><button class="btn btn-default btn-xs" title="Agregar al carro">
+                  <i class="glyphicon glyphicon-shopping-cart"></i>
+                </button></td>
+              </tr>
+              </tbody>
+            </table>
+            <div class="panel-body text-muted">Puede agregar al carro este item según la tienda donde retira, los precios pueden variar.</div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div>
-        <label>nombre: </label>
-        <input [(ngModel)]="producto.nombre" placeholder="nombre" />
+
+    <div class="col-md-3">
+      <p>Quena store es un catalogo virtual de instrumentos musicales autoctonos, con tiendas en todo el mundo.</p>
+      <br>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <i class="glyphicon glyphicon-tags"></i> &nbsp;&nbsp;Categorias
+        </div>
+        <div class="list-group">
+          <a href="#" class="list-group-item">Category 1</a>
+          <a href="#" class="list-group-item">Category 2</a>
+          <a href="#" class="list-group-item">Category 3</a>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <i class="glyphicon glyphicon-shopping-cart"></i> &nbsp;Mi carro de compras
+        </div>
+        <div class="panel-body">
+          todo...
+        </div>
+      </div>
+
     </div>
-    <div>
-        <label>marca: </label>
-        <input [(ngModel)]="producto.marca" placeholder="marca" />
-    </div>
-    <div>
-        <label>modelo: </label>
-        <input [(ngModel)]="producto.modelo" placeholder="modelo" />
-    </div>
-    <div>
-        <label>descripcion: </label>
-        <textarea [(ngModel)]="producto.descripcion" placeholder="descripcion"></textarea>
-    </div>
-    <button (click)="goBack()">Back</button>
-    <button (click)="save()">Save</button>
+  </div>
 </div>
+
+
+

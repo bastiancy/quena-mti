@@ -10,4 +10,5 @@ export class Producto {
     origen: string;
     categorias: Categoria[];
     caractetisticas: [{nombre: string, valor: string}];
+    imagenes: [{url: string}];
 }

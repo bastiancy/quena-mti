@@ -73,6 +73,24 @@ module.exports.addProducto = function(req, res, next) {
     let item = new Producto();
     item.nombre = body.nombre;
     item.descripcion = body.descripcion;
+    item.caracteristicas = (body.caracteristicas && body.caracteristicas.length > 0) ? body.caracteristicas : [];
+    item.imagenes = (body.imagenes && body.imagenes.length > 0) ? body.imagenes : [];
+
+    // if (body.caracteristicas && body.caracteristicas.length > 0) {
+    //     for (let i = 0; i < body.caracteristicas.length; i++) {
+    //         if (body.caracteristicas[i]) {
+    //             item.caracteristicas.push({'nombre': body.caracteristicas[i].nombre, 'valor': body.caracteristicas[i].valor});
+    //         }
+    //     }
+    // }
+    //
+    // if (body.imagenes && body.imagenes.length > 0) {
+    //     for (let i = 0; i < body.imagenes.length; i++) {
+    //         if (body.imagenes[i] && body.imagenes[i].url) {
+    //             item.imagenes.push({'url': body.imagenes[i].url});
+    //         }
+    //     }
+    // }
 
     item.save(function (err) {
         if (err) {

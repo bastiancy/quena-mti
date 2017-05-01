@@ -1,3 +1,4 @@
+/*
 h1 {
     font-size: 1.2em;
     color: #999;
@@ -25,4 +26,19 @@ nav a:hover {
 }
 nav a.active {
     color: #039be5;
+}*/
+
+.navbar-inverse {
+  background-color: #304668;
+  border-color: #252d37;
+}
+
+.navbar-brand {
+  padding: 3px 0;
+}
+
+.navbar-brand img {
+  height: 70px;
+  margin: 0;
+  padding: 0;
 }

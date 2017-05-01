@@ -1,37 +1,65 @@
-<h2>Productos</h2>
-<div>
-    <p>Agregar una Producto</p>
-    <div>
-        <label>Nombre:</label> <input #productoNombre />
-    </div>
-    <div>
-        <label>Descripcion:</label> <textarea #productoDescripcion></textarea>
-    </div>
-    <button (click)="add(productoNombre.value, productoDescripcion.value); productoNombre.value=''; productoDescripcion.value=''">
-        Add
-    </button>
-</div>
-<br>
-<div class="productos">
-    <p>Listado de Productos</p>
-    <table>
-        <tr>
-            <th>id</th>
-            <th>nombre</th>
-            <th>marca</th>
-            <th>modelo</th>
-            <th>opciones</th>
-        </tr>
-        <tr *ngFor="let producto of productos">
-            <td>{{producto.id}}</td>
-            <td>{{producto.nombre}}</td>
-            <td>{{producto.marca}}</td>
-            <td>{{producto.modelo}}</td>
-            <td>
-                <button (click)="gotoDetail(producto);">View</button>
-                <button class="delete" (click)="delete(producto); $event.stopPropagation()">x</button>
-            </td>
-        </tr>
+<div class="row">
 
-    </table>
+  <div class="col-md-9" style="border-right: 1px solid #e3e3e3;">
+    <div class="row">
+      <h3>Productos</h3>
+      <hr>
+    </div>
+    <div class="row">
+      <div class="col-sm-4 col-lg-4 col-md-4" *ngFor="let producto of productos">
+        <div class="thumbnail">
+          <div style="height: 200px; display: block; overflow: hidden;">
+            <img *ngIf="producto.imagenes.length > 0" src="{{ producto.imagenes[0].url }}" class="img-responsive" alt="">
+            <img *ngIf="producto.imagenes.length <= 0" src="http://placehold.it/320x150" class="img-responsive" alt="">
+          </div>
+
+          <div class="caption">
+            <h4 class="pull-right">$ 0.0</h4>
+            <h4><a (click)="gotoDetail(producto);">{{producto.nombre}}</a>
+            </h4>
+            <p>
+              {{producto.descripcion}}
+            </p>
+          </div>
+          <div class="ratings">
+            <p class="pull-right">12 reviews</p>
+            <p>
+              <span class="glyphicon glyphicon-star"></span>
+              <span class="glyphicon glyphicon-star"></span>
+              <span class="glyphicon glyphicon-star"></span>
+              <span class="glyphicon glyphicon-star"></span>
+              <span class="glyphicon glyphicon-star-empty"></span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <p>Quena store es un catalogo virtual de instrumentos musicales autoctonos, con tiendas en todo el mundo.</p>
+    <br>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <i class="glyphicon glyphicon-tags"></i> &nbsp;&nbsp;Categorias
+      </div>
+      <div class="list-group">
+        <a href="#" class="list-group-item">Category 1</a>
+        <a href="#" class="list-group-item">Category 2</a>
+        <a href="#" class="list-group-item">Category 3</a>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <i class="glyphicon glyphicon-shopping-cart"></i> &nbsp;Mi carro de compras
+      </div>
+      <div class="panel-body">
+        todo...
+      </div>
+    </div>
+
+  </div>
+
 </div>

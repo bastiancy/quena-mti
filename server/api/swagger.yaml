@@ -962,20 +962,38 @@ definitions:
       origen:
         type: string
       categorias:
-        allOf:
-          - $ref: "#/definitions/Categoria"
+        type: array
+        items:
+          $ref: "#/definitions/Categoria"
       caracteristicas:
-        allOf:
-          - type: object
-            properties:
-              nombre:
-                type: string
-              valor:
-                type: string
-            required:
-            - nombre
+        type: array
+        items:
+          $ref: "#/definitions/CaracteristicaProducto"
+      imagenes:
+        type: array
+        items:
+          $ref: "#/definitions/ImagenProducto"
     required:
       - nombre
+
+  CaracteristicaProducto:
+      type: object
+      properties:
+        nombre:
+          type: string
+        valor:
+          type: string
+      required:
+        - nombre
+        - valor
+
+  ImagenProducto:
+      type: object
+      properties:
+        url:
+          type: string
+      required:
+        - url
 
   Inventario:
     type: object
