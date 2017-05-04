@@ -9,23 +9,25 @@ import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService }  from './in-memory-data.service';
 
 import { AppComponent }         from './app.component';
-import { DashboardComponent }   from './heroes/dashboard.component';
-import { HeroDetailComponent }  from './heroes/hero-detail.component';
-import { HeroesComponent }      from './heroes/heroes.component';
-import { HeroService }          from './heroes/hero.service';
-import { HeroSearchComponent }  from "./heroes/hero-search.component";
-
-import { CategoriaService }     from "./categorias/categoria.service";
-import { CategoriasComponent }  from "./categorias/categorias.component";
-import { CategoriaDetailComponent } from "./categorias/categoria-detail.component";
-import { ProductosComponent} from "./productos/productos.component";
-import { ProductoDetailComponent } from "./productos/producto-detail.component";
+import { DashboardComponent }   from './dashboard.component';
 
 import { APP_CONFIG, APP_DI_CONFIG } from "./app-config.constants";
-import {ProductoService} from "./productos/producto.service";
-import {EstablecimientosComponent} from "./establecimientos/establecimientos.component";
-import {EstablecimientoService} from "./establecimientos/establecimiento.service";
-import {EstablecimientoDetailComponent} from "./establecimientos/establecimiento-detail.component";
+import { CategoriaService }     from "./categorias/categoria.service";
+import { ProductoService } from "./productos/producto.service";
+import { EstablecimientoService } from "./establecimientos/establecimiento.service";
+
+import { AdminCategoriasComponent }  from "./categorias/admin-categorias.component";
+import { AdminCategoriaDetailComponent } from "./categorias/admin-categoria-detail.component";
+
+import { ProductosComponent} from "./productos/productos.component";
+import { ProductoDetailComponent } from "./productos/producto-detail.component";
+import { EstablecimientosComponent } from "./establecimientos/establecimientos.component";
+import {AdminEstablecimientosComponent} from "./establecimientos/admin-establecimientos.component";
+import {AdminEstablecimientoDetailComponent} from "./establecimientos/admin-establecimiento-detail.component";
+import {AdminProductosComponent} from "./productos/admin-productos.component";
+import {AdminProductoDetailComponent} from "./productos/admin-producto-detail.component";
+import {CategoriasWidgetComponent} from "./categorias/categorias-widget.component";
+
 
 @NgModule({
   imports: [
@@ -38,18 +40,18 @@ import {EstablecimientoDetailComponent} from "./establecimientos/establecimiento
   declarations: [
     AppComponent,
     DashboardComponent,
-    HeroDetailComponent,
-    HeroesComponent,
-    HeroSearchComponent,
-    CategoriasComponent,
-    CategoriaDetailComponent,
+    AdminCategoriasComponent,
+    AdminCategoriaDetailComponent,
+    AdminEstablecimientosComponent,
+    AdminEstablecimientoDetailComponent,
+    AdminProductosComponent,
+    AdminProductoDetailComponent,
     ProductosComponent,
     ProductoDetailComponent,
     EstablecimientosComponent,
-    EstablecimientoDetailComponent
+    CategoriasWidgetComponent
   ],
   providers: [
-      HeroService,
       CategoriaService,
       ProductoService,
       EstablecimientoService,

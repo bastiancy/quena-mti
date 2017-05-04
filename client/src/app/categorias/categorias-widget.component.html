@@ -1,0 +1,10 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <i class="glyphicon glyphicon-tags"></i> &nbsp;&nbsp;Categorias
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let cat of categorias">
+      <a (click)="goToProductos(cat)">{{cat.nombre}}</a>
+    </li>
+  </ul>
+</div>

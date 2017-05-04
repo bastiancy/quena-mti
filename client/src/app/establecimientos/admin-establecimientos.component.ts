@@ -8,10 +8,9 @@ import { EstablecimientoService } from './establecimiento.service';
 
 @Component({
     selector: 'my-establecimientos',
-    templateUrl: './establecimientos.component.html',
-    styleUrls: [ './establecimientos.component.css' ]
+    templateUrl: './admin-establecimientos.component.html'
 })
-export class EstablecimientosComponent implements OnInit {
+export class AdminEstablecimientosComponent implements OnInit {
     establecimientos: Establecimiento[];
     selectedEstablecimiento: Establecimiento;
 
@@ -34,11 +33,7 @@ export class EstablecimientosComponent implements OnInit {
     }
 
     gotoDetail(establecimiento: Establecimiento): void {
-        this.router.navigate(['/establecimientos/detail', establecimiento.id]);
-    }
-
-    getMapsUrl(establecimiento: Establecimiento): string {
-        return 'https://www.google.com/maps/embed/v1/place?key=' + this.config.GOOGLE_MAPS_EMBED_API_KEY + '&q=Space+Needle,Seattle+WA';
+        this.router.navigate(['/admin/establecimientos/detail', establecimiento.id]);
     }
 
     add(nombre: string, descripcion: string): void {

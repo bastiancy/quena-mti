@@ -72,7 +72,6 @@ module.exports.addEstablecimiento = function(req, res, next) {
 
     let item = new Establecimiento();
     item.nombre = body.nombre;
-    item.descripcion = body.descripcion;
 
     item.save(function (err) {
         if (err) {

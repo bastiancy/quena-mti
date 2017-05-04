@@ -363,9 +363,9 @@ paths:
         - in: body
           name: body
           description: Inventario object para agregar
-          required: false
+          required: true
           schema:
-            $ref: "#/definitions/Inventario"
+            $ref: "#/definitions/AddInventario"
       responses:
         "200":
           description: successful operation
@@ -923,8 +923,8 @@ definitions:
         type: string
       nombre:
         type: string
-      direccion:
-        $ref: "#/definitions/Direccion"
+#      direccion:
+#        $ref: "#/definitions/Direccion"
     required:
       - nombre
 
@@ -1022,6 +1022,31 @@ definitions:
       - establecimiento
       - producto
       - estado
+
+  AddInventario:
+    type: object
+    properties:
+      establecimientoId:
+        type: string
+      productoId:
+        type: string
+      codigo_tipo:
+        type: string
+      codigo_valor:
+        type: string
+      precio_moneda:
+        type: string
+      precio_valor:
+        type: number
+        format: double
+      estado:
+        type: string
+      fecha_actualizado:
+        type: string
+        format: date-time
+    required:
+      - establecimientoId
+      - productoId
 
   Cliente:
     type: object

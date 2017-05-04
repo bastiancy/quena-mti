@@ -1,0 +1,105 @@
+<h3>Administracion</h3>
+<br>
+
+<ul class="nav nav-tabs">
+  <li role="presentation">
+    <a routerLink="/admin/categorias" routerLinkActive="active">Categorias</a>
+  </li>
+  <li role="presentation">
+    <a routerLink="/admin/productos" routerLinkActive="active">Productos</a>
+  </li>
+  <li role="presentation" class="active">
+    <a routerLink="/admin/establecimientos" routerLinkActive="active">Establecimientos</a>
+  </li>
+</ul>
+<br>
+
+<div class="row" *ngIf="establecimiento">
+  <div class="col-md-5">
+    <div class="panel panel-default">
+      <div class="panel-heading">Editar establecimiento</div>
+      <div class="panel-body">
+
+        <div class="form-group">
+          <label>id: </label>{{establecimiento.id}}
+        </div>
+        <div class="form-group">
+          <label>Nombre:</label>
+          <input class="form-control" [(ngModel)]="establecimiento.nombre" placeholder="nombre" />
+        </div>
+        <div class="form-group">
+          <label>Descripcion:</label>
+          <textarea class="form-control" [(ngModel)]="establecimiento.descripcion" placeholder="descripcion"></textarea>
+        </div>
+
+        <button class="btn btn-default" (click)="goBack()">Volver</button>
+        <button class="btn btn-success" (click)="save()">Guardar cambios</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<h4>Inventario de la tienda</h4>
+<br>
+
+<div class="row">
+  <div class="col-md-7">
+    <div class="panel panel-default">
+      <div class="panel-heading">Stock de productos</div>
+      <div class="panel-body">
+
+      </div>
+      <table class="table">
+        <thead>
+        <tr>
+          <th>id producto</th>
+          <th>nombre producto</th>
+          <th>stock</th>
+          <th>precio</th>
+          <th>opciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of inventarios">
+          <td>{{item.producto.id}}</td>
+          <td>{{item.producto.nombre}}</td>
+          <td>0</td>
+          <td>{{item.precio.moneda}}$ {{item.precio.valor}}</td>
+          <td>
+            <button class="btn btn-default btn-sm" title="Editar" (click)="gotoDetail(item);"><i class="glyphicon glyphicon-pencil"></i></button>
+            <button class="btn btn-danger btn-sm" title="Borrar" (click)="delete(item);"><i class="glyphicon glyphicon-trash"></i></button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div class="panel panel-default">
+      <div class="panel-heading">Agregar producto</div>
+      <div class="panel-body">
+
+        <div class="form-group">
+          <label>Producto:</label>
+          <select class="form-control" [(ngModel)]="inventarioProducto">
+            <option *ngFor="let p of productos" [ngValue]="p">({{p.id}}) {{p.nombre}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Precio:</label>
+          <select class="form-control" #inventarioPrecioMoneda>
+            <option value="CLP">CLP</option>
+            <option value="USD">USD</option>
+          </select>
+          <input class="form-control" #inventarioPrecio />
+        </div>
+
+        <button class="btn btn-success" (click)="addInventario(inventarioProducto, inventarioPrecioMoneda.value, inventarioPrecio.value); inventarioProducto=null; inventarioPrecioMoneda.value=''; inventarioPrecio.value=''">
+          Guardar
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>

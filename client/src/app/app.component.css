@@ -34,11 +34,11 @@ nav a.active {
 }
 
 .navbar-brand {
-  padding: 3px 0;
+  padding: 2px 0;
 }
 
 .navbar-brand img {
-  height: 70px;
+  height: 60px;
   margin: 0;
   padding: 0;
 }

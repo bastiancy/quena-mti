@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
+import { Router } from "@angular/router";
 
 import { Categoria } from './categoria';
 import { CategoriaService } from './categoria.service';
 
 @Component({
     selector: 'my-categorias',
-    templateUrl: './categorias.component.html',
-    styleUrls: [ './categorias.component.css' ]
+    templateUrl: './admin-categorias.component.html'
 })
-export class CategoriasComponent implements OnInit {
+export class AdminCategoriasComponent implements OnInit {
     categorias: Categoria[];
     selectedCategoria: Categoria;
 
@@ -30,7 +29,7 @@ export class CategoriasComponent implements OnInit {
     }
 
     gotoDetail(categoria: Categoria): void {
-        this.router.navigate(['/categorias/detail', categoria.id]);
+        this.router.navigate(['/admin/categorias/detail', categoria.id]);
     }
 
     add(nombre: string, descripcion: string): void {

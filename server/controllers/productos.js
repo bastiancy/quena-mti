@@ -4,34 +4,57 @@ const util = require('util');
 const accepts = require('accepts');
 const jstoxml = require('../helpers/js2xml');
 const Producto = require('../models/producto');
+const Categoria = require('../models/categoria');
+const Establecimiento = require('../models/establecimiento');
 
 module.exports.findAllProducto = function(req, res, next) {
-    Producto.find(function (err, data) {
-        let accept = accepts(req);
-        let result = null;
+    let categoriaId = (req.swagger.params.categoria ? req.swagger.params.categoria.value : null);
+    let categoria = null;
+    let establecimientoId = (req.swagger.params.establecimiento ? req.swagger.params.establecimiento.value : null);
+    let establecimiento = null;
 
-        if (err) {
-            return next(new Error(err));
+    Promise.all([
+        Establecimiento.findById(establecimientoId).then(result => establecimiento = result),
+        Categoria.findById(categoriaId).then(result => categoria = result),
+    ]).then(function () {
+
+        let params = {};
+        if (categoria) {
+            params.categoria = categoria;
+        }
+        if (establecimiento) {
+            params.establecimiento = establecimiento;
         }
 
-        switch(accept.type(['json', 'xml', 'html'])) {
-            case 'xml':
-                result = Producto.toXml(data, false);
-                res.setHeader('Content-Type', 'application/xml');
-                res.end(result);
-                break;
-            case 'html':
-                result = Producto.toHtml(data, false);
-                res.setHeader('Content-Type', 'text/html');
-                res.end(result);
-                break;
-            default:
-                // fallback to json
-                result = Producto.toJson(data);
-                res.setHeader('Content-Type', 'application/json');
-                res.end(result);
-                break;
-        }
+        Producto.find(params, function (err, data) {
+            let accept = accepts(req);
+            let result = null;
+
+            if (err) {
+                return next(new Error(err));
+            }
+
+            switch(accept.type(['json', 'xml', 'html'])) {
+                case 'xml':
+                    result = Producto.toXml(data, false);
+                    res.setHeader('Content-Type', 'application/xml');
+                    res.end(result);
+                    break;
+                case 'html':
+                    result = Producto.toHtml(data, false);
+                    res.setHeader('Content-Type', 'text/html');
+                    res.end(result);
+                    break;
+                default:
+                    // fallback to json
+                    result = Producto.toJson(data);
+                    res.setHeader('Content-Type', 'application/json');
+                    res.end(result);
+                    break;
+            }
+        });
+    }, function (err) {
+        return next(new Error(err));
     });
 };
 
@@ -73,6 +96,9 @@ module.exports.addProducto = function(req, res, next) {
     let item = new Producto();
     item.nombre = body.nombre;
     item.descripcion = body.descripcion;
+    item.origen = body.origen;
+    item.modelo = body.modelo;
+    item.marca = body.marca;
     item.caracteristicas = (body.caracteristicas && body.caracteristicas.length > 0) ? body.caracteristicas : [];
     item.imagenes = (body.imagenes && body.imagenes.length > 0) ? body.imagenes : [];
 

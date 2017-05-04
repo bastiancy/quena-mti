@@ -1,34 +1,38 @@
-<h2>Establecimiento</h2>
-<div>
-    <p>Agregar una Establecimiento</p>
-    <div>
-        <label>Nombre:</label> <input #establecimientoNombre />
-    </div>
-    <div>
-        <label>Descripcion:</label> <textarea #establecimientoDescripcion></textarea>
-    </div>
-    <button (click)="add(establecimientoNombre.value, establecimientoDescripcion.value); establecimientoNombre.value=''; establecimientoDescripcion.value=''">
-        Add
-    </button>
-</div>
-<br>
-<div class="establecimiento">
-    <p>Listado de Establecimiento</p>
-    <table>
-        <tr>
-            <th>id</th>
-            <th>nombre</th>
-            <th>descripcion</th>
-            <th>opciones</th>
-        </tr>
-        <tr *ngFor="let est of establecimientos">
-            <td>{{est.id}}</td>
-            <td>{{est.nombre}}</td>
-            <td>
-                <button (click)="gotoDetail(est);">View</button>
-                <button class="delete" (click)="delete(est); $event.stopPropagation()">x</button>
-            </td>
-        </tr>
+<div class="row">
 
-    </table>
+  <div class="col-md-10">
+    <div class="row">
+      <h3>Establecimientos</h3>
+      <hr>
+    </div>
+
+    <div *ngFor="let est of establecimientos">
+
+      <div class="row">
+        <div class="col-md-7">
+          <img class="img-responsive" src="https://www.google.com/permissions/images/maps-att.png" alt="">
+        </div>
+        <div class="col-md-5">
+          <h3>{{est.nombre}}</h3>
+          <p *ngIf="est.direccion">
+            Direccion: {{est.direccion.descripcion}}<br>
+            Region: {{est.direccion.region}}<br>
+            Pais: {{est.direccion.pais}}
+          </p>
+          <p>Direccion: xxxx<br>
+            Pais: xxxx</p>
+          <p>
+            <a class="btn btn-default" (click)="gotoDetail(est);">Ver productos en stock <span class="glyphicon glyphicon-chevron-right"></span></a>
+          </p>
+        </div>
+      </div>
+      <hr>
+    </div>
+
+  </div>
 </div>
+
+
+
+
+

@@ -8,9 +8,9 @@ import { CategoriaService } from './categoria.service';
 
 @Component({
     selector: 'categoria-detail',
-    templateUrl: './categoria-detail.component.html',
+    templateUrl: './admin-categoria-detail.component.html',
 })
-export class CategoriaDetailComponent implements OnInit {
+export class AdminCategoriaDetailComponent implements OnInit {
     categoria: Categoria;
 
     constructor(

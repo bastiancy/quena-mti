@@ -6,6 +6,7 @@ import 'rxjs/add/operator/toPromise';
 import { Establecimiento } from './establecimiento';
 import { IAppConfig } from "../app-config.interface";
 import { APP_CONFIG } from "../app-config.constants";
+import {Inventario} from "../inventarios/inventario";
 
 @Injectable()
 export class EstablecimientoService {
@@ -73,4 +74,19 @@ export class EstablecimientoService {
             .then(() => null)
             .catch(this.handleError);
     }
+
+    getInventarioByEstablecimiento(establecimiento: Establecimiento): Promise<Inventario[]> {
+
+      return this.http.get(this.establecimientosUrl + '/' + establecimiento.id + '/inventario')
+        .toPromise()
+        .then(response => response.json() as Inventario[])
+        // .then(function (response): Producto[] {
+        //     console.log(response);
+        //     console.log(response.json());
+        //     console.log(response.json().data);
+        //     return response.json();
+        // })
+        .catch(this.handleError);
+    }
+
 }

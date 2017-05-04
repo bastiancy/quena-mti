@@ -20,11 +20,11 @@ InventarioSchema.statics.toJson = function (data) {
             '_class': 'Inventario',
             'id': item._id,
             'codigo': (item.codigo ? {'tipo': item.codigo.tipo, 'valor': item.codigo.valor} : null),
-            'establecimiento': (item.establecimiento ? {'_class': 'Establecimiento', 'id': item.establecimiento._id} : null),
-            'producto': (item.producto ? {'_class': 'Producto', 'id': item.producto._id} : null),
             'precio': (item.precio ? {'moneda': item.precio.moneda, 'valor': item.precio.valor} : null),
             'estado': item.estado,
             'fecha_actualizado': item.fechaActualizado,
+            'establecimiento': (item.establecimiento ? {'_class': 'Establecimiento', 'id': item.establecimiento} : null),
+            'producto': (item.producto ? {'_class': 'Producto', 'id': item.producto} : null),
         };
     };
 

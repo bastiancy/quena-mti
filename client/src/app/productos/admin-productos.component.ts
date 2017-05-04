@@ -1,42 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import {Router, Params, ActivatedRoute} from "@angular/router";
+import { Component, OnInit, Inject} from '@angular/core';
+import { Router } from "@angular/router";
 
+import { APP_CONFIG } from "../app-config.constants";
+import { IAppConfig } from "../app-config.interface";
 import { Producto } from './producto';
 import { ProductoService } from './producto.service';
-import {Categoria} from "../categorias/categoria";
 
 @Component({
     selector: 'my-productos',
-    templateUrl: './productos.component.html',
-    styleUrls: ['./productos.component.css' ]
+    templateUrl: './admin-productos.component.html'
 })
-export class ProductosComponent implements OnInit {
+export class AdminProductosComponent implements OnInit {
     productos: Producto[];
     selectedProducto: Producto;
-    filtroCategoria: Categoria;
 
     constructor(
         private router: Router,
-        private route: ActivatedRoute,
-        private productoService: ProductoService) { }
+        private productoService: ProductoService,
+        @Inject( APP_CONFIG ) private config: IAppConfig
+    ) { }
 
     getProductos(): void {
         this.productoService.getProductos().then(productos => this.productos = productos);
     }
 
     ngOnInit(): void {
-        this.route.params
-          .switchMap((params: Params) => {
-            if (params['categoria']) {
-              return this.productoService.getProductosBy({'categoria': params['categoria']})
-            }
-            else if (params['establecimiento']) {
-              return this.productoService.getProductosBy({'establecimiento': params['establecimiento']})
-            }
-
-            return this.productoService.getProductos()
-          })
-          .subscribe(items => this.productos = items);
+        this.getProductos();
     }
 
     onSelect(producto: Producto): void {
@@ -44,7 +33,7 @@ export class ProductosComponent implements OnInit {
     }
 
     gotoDetail(producto: Producto): void {
-        this.router.navigate(['/productos/detail', producto.id]);
+        this.router.navigate(['/admin/productos/detail', producto.id]);
     }
 
     add(nombre: string, descripcion: string): void {

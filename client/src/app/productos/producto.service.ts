@@ -1,11 +1,12 @@
 import { Injectable, Inject }    from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import {Headers, Http, URLSearchParams} from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
 import { Producto } from './producto';
 import { IAppConfig } from "../app-config.interface";
 import { APP_CONFIG } from "../app-config.constants";
+import {Inventario} from "../inventarios/inventario";
 
 @Injectable()
 export class ProductoService {
@@ -30,6 +31,21 @@ export class ProductoService {
             //     console.log(response.json().data);
             //     return response.json();
             // })
+            .catch(this.handleError);
+    }
+
+    getProductosBy(data: any): Promise<Producto[]> {
+        let params = new URLSearchParams();
+        if (data.categoria) {
+          params.set('categoria', data.categoria);
+        }
+        if (data.establecimiento) {
+          params.set('establecimiento', data.establecimiento);
+        }
+
+        return this.http.get(this.productosUrl, {search: params})
+            .toPromise()
+            .then(response => response.json() as Producto[])
             .catch(this.handleError);
     }
 
@@ -73,4 +89,5 @@ export class ProductoService {
             .then(() => null)
             .catch(this.handleError);
     }
+
 }

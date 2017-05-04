@@ -52,16 +52,10 @@ ProductoSchema.statics.toXml = function (data, fragment) {
     let def = function(item) {
         return {
             'categoria': {
-                '@class': 'Categoria',
+                '@class': 'Producto',
                 '@id': item._id,
                 'nombre': item.nombre,
                 'descripcion': item.descripcion,
-                'categoriaPadre': () => {
-                    if (item.categoriaPadre)
-                        return {'@class': 'Categoria', '@id': item.categoriaPadre};
-
-                    return null;
-                }
             }
         };
     };
@@ -91,11 +85,9 @@ ProductoSchema.statics.toXml = function (data, fragment) {
 ProductoSchema.statics.toHtml = function (data, fragment) {
     let def = function(item) {
         return '<ul typeof="schema:Thing">' +
-            '<li><a href="/categorias/' + item._id + '">id: <span property="schema:identifier">' + item._id + '</span></a></li>'
+            '<li><a href="/productos/' + item._id + '">id: <span property="schema:identifier">' + item._id + '</span></a></li>'
             + '<li>nombre: <span property="schema:name">' + item.nombre + '</span></li>'
             + '<li>descripcion: <span property="schema:description">' + item.descripcion + '</span></li>'
-            + '<li>categoriaPadre: '
-            + (item.categoriaPadre ? '<a href="/categorias/' + item.categoriaPadre + '">_id: ' + item.categoriaPadre + '</a>' : 'null')
             + '</li></ul>'
             ;
     };
@@ -110,7 +102,7 @@ ProductoSchema.statics.toHtml = function (data, fragment) {
         if (fragment)
             return root;
 
-        return '<html><body><h3>Categorias</h3>' + root + '</body></html>';
+        return '<html><body><h3>Productos</h3>' + root + '</body></html>';
     }
     else {
         let root = '' + def(data);
@@ -118,7 +110,7 @@ ProductoSchema.statics.toHtml = function (data, fragment) {
         if (fragment)
             return root;
 
-        return '<html><body><h3>Categoria</h3>' + root + '</body></html>';
+        return '<html><body><h3>Productos</h3>' + root + '</body></html>';
     }
 };
 
