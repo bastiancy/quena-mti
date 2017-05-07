@@ -4,7 +4,6 @@
   "description": "Tienda online para venta de instrumentos musicales,   para la tarea del MTI ",
   "scripts": {
     "start": "node server.js",
-    "prestart": "npm install",
     "test": "mocha --recursive"
   },
   "engines": {

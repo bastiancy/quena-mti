@@ -4,7 +4,7 @@
   "description": "QuickStart package.json from the documentation, supplemented with testing support",
   "scripts": {
     "start": "node server.js",
-    "prestart": "npm install && npm run build:aot",
+    "prestart": "npm run build:aot",
     "build:aot": "ngc -p tsconfig-aot.json && rollup -c rollup-config.js",
     "serve:aot": "lite-server -c bs-config.aot.json",
     "build": "tsc -p src/",
@@ -25,7 +25,8 @@
     "lint": "tslint ./src/**/*.ts -t verbose"
   },
   "engines": {
-    "node": "~4.8"
+    "node": "4.8.1",
+    "npm": "4.4.4"
   },
   "author": "",
   "license": "MIT",
