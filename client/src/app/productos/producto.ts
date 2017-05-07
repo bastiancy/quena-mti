@@ -1,14 +1,14 @@
 import {Categoria} from "../categorias/categoria";
 
 export class Producto {
-    id: string;
+    _id: string;
     codigo: {tipo: string, valor: string};
     nombre: string;
     marca: string;
     modelo: string;
     descripcion: string;
     origen: string;
-    categorias: Categoria[];
+    categoria: Categoria;
     caractetisticas: [{nombre: string, valor: string}];
     imagenes: [{url: string}];
 }

@@ -36,7 +36,7 @@ export class ProductoDetailComponent implements OnInit {
 
     delete(producto: Producto): void {
       this.productoService
-        .delete(producto.id)
+        .delete(producto._id)
         .then(() => {
           this.goBack()
         });

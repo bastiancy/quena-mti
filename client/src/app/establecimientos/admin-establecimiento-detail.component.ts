@@ -7,7 +7,7 @@ import { Establecimiento } from './establecimiento';
 import { EstablecimientoService } from './establecimiento.service';
 import {Producto} from "../productos/producto";
 import {ProductoService} from "../productos/producto.service";
-import {Inventario} from "../inventarios/inventario";
+import {Inventario} from "./inventario";
 
 @Component({
     selector: 'establecimiento-detail',
@@ -17,6 +17,7 @@ export class AdminEstablecimientoDetailComponent implements OnInit {
     establecimiento: Establecimiento;
     productos: Producto[];
     inventarios: Inventario[];
+    newInventario: Inventario;
 
     constructor(
         private establecimientoService: EstablecimientoService,
@@ -32,12 +33,12 @@ export class AdminEstablecimientoDetailComponent implements OnInit {
         ;
 
         this.productoService.getProductos().then(productos => this.productos = productos);
+        this.refreshNewInventario();
     }
 
-    addInventario(inventarioProducto: Producto, inventarioPrecioMoneda: string, inventarioPrecio: string): void {
-        console.log(inventarioProducto);
-        console.log(inventarioPrecioMoneda);
-        console.log(inventarioPrecio);
+    addInventario(): void {
+        console.log(this.newInventario);
+        this.refreshNewInventario();
     }
 
     goBack(): void {
@@ -63,11 +64,11 @@ export class AdminEstablecimientoDetailComponent implements OnInit {
     }
 
     private replaceProductos(items: Inventario[]) {
-      let ps = [];
+      let ps: Array<any> = [];
 
       for (let it of items) {
-        if (it.producto && !it.producto.nombre) {
-          let p = this.productoService.getProducto(it.producto.id).then(prod => {
+        if (it.producto) {
+          let p = this.productoService.getProducto(it.producto instanceof Producto ? it.producto._id : it.producto).then(prod => {
             it.producto = prod;
             return it;
           });
@@ -80,4 +81,8 @@ export class AdminEstablecimientoDetailComponent implements OnInit {
 
       return Promise.all(ps);
     }
+
+  private refreshNewInventario() {
+    this.newInventario = new Inventario();
+  }
 }

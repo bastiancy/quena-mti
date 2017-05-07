@@ -6,27 +6,27 @@ const jstoxml = require('../helpers/js2xml');
 const Producto = require('../models/producto');
 const Categoria = require('../models/categoria');
 const Establecimiento = require('../models/establecimiento');
+const Inventario = require('../models/inventario');
 
 module.exports.findAllProducto = function(req, res, next) {
-    let categoriaId = (req.swagger.params.categoria ? req.swagger.params.categoria.value : null);
-    let categoria = null;
-    let establecimientoId = (req.swagger.params.establecimiento ? req.swagger.params.establecimiento.value : null);
-    let establecimiento = null;
+    let categoria = (req.swagger.params.categoria ? req.swagger.params.categoria.value : null);
 
-    Promise.all([
-        Establecimiento.findById(establecimientoId).then(result => establecimiento = result),
-        Categoria.findById(categoriaId).then(result => categoria = result),
-    ]).then(function () {
+    // Promise.all([
+    //     Establecimiento.findById(establecimientoId).then(result => establecimiento = result),
+    //     Categoria.findById(categoriaId).then(result => categoria = result),
+    // ]).then(function () {
 
         let params = {};
         if (categoria) {
             params.categoria = categoria;
         }
-        if (establecimiento) {
-            params.establecimiento = establecimiento;
-        }
+        // if (establecimientoId) {
+        //     params.establecimiento = establecimientoId;
+        // }
 
-        Producto.find(params, function (err, data) {
+        Producto.find(params)
+        .populate('categoria')
+        .exec(function (err, data) {
             let accept = accepts(req);
             let result = null;
 
@@ -47,21 +47,23 @@ module.exports.findAllProducto = function(req, res, next) {
                     break;
                 default:
                     // fallback to json
-                    result = Producto.toJson(data);
+                    result = JSON.stringify(data);
                     res.setHeader('Content-Type', 'application/json');
                     res.end(result);
                     break;
             }
         });
-    }, function (err) {
-        return next(new Error(err));
-    });
+    // }, function (err) {
+    //     return next(new Error(err));
+    // });
 };
 
 module.exports.findOneProducto = function(req, res, next) {
     let productoId = req.swagger.params.productoId.value;
 
-    Producto.findById(productoId, function(err, data) {
+    Producto.findById(productoId)
+    .populate('categoria')
+    .exec(function (err, data) {
         let accept = accepts(req);
         let result = null;
 
@@ -82,7 +84,7 @@ module.exports.findOneProducto = function(req, res, next) {
                 break;
             default:
                 // fallback to json
-                result = Producto.toJson(data);
+                result = JSON.stringify(data);
                 res.setHeader('Content-Type', 'application/json');
                 res.end(result);
                 break;
@@ -92,57 +94,84 @@ module.exports.findOneProducto = function(req, res, next) {
 
 module.exports.addProducto = function(req, res, next) {
     let body = req.swagger.params.body.value;
+    let categoria = null;
 
-    let item = new Producto();
-    item.nombre = body.nombre;
-    item.descripcion = body.descripcion;
-    item.origen = body.origen;
-    item.modelo = body.modelo;
-    item.marca = body.marca;
-    item.caracteristicas = (body.caracteristicas && body.caracteristicas.length > 0) ? body.caracteristicas : [];
-    item.imagenes = (body.imagenes && body.imagenes.length > 0) ? body.imagenes : [];
+    if (body.categoria) {
+        categoria = (body.categoria._id ? body.categoria._id : body.categoria);
+    }
 
-    // if (body.caracteristicas && body.caracteristicas.length > 0) {
-    //     for (let i = 0; i < body.caracteristicas.length; i++) {
-    //         if (body.caracteristicas[i]) {
-    //             item.caracteristicas.push({'nombre': body.caracteristicas[i].nombre, 'valor': body.caracteristicas[i].valor});
-    //         }
-    //     }
-    // }
-    //
-    // if (body.imagenes && body.imagenes.length > 0) {
-    //     for (let i = 0; i < body.imagenes.length; i++) {
-    //         if (body.imagenes[i] && body.imagenes[i].url) {
-    //             item.imagenes.push({'url': body.imagenes[i].url});
-    //         }
-    //     }
-    // }
+    Promise.all([
+        Categoria.findById(categoria).then(result => categoria = result),
+    ]).then(function () {
 
-    item.save(function (err) {
-        if (err) {
-            return next(new Error(err));
+        let item = new Producto();
+        item.nombre = body.nombre;
+        item.descripcion = body.descripcion;
+        item.origen = body.origen;
+        item.modelo = body.modelo;
+        item.marca = body.marca;
+        item.caracteristicas = (body.caracteristicas && body.caracteristicas.length > 0) ? body.caracteristicas : [];
+        item.imagenes = (body.imagenes && body.imagenes.length > 0) ? body.imagenes : [];
+
+        if (categoria) {
+            item.categoria = categoria;
         }
 
-        let result = Producto.toJson(item);
-        res.setHeader('Content-Type', 'application/json');
-        res.end(result);
+        // if (body.caracteristicas && body.caracteristicas.length > 0) {
+        //     for (let i = 0; i < body.caracteristicas.length; i++) {
+        //         if (body.caracteristicas[i]) {
+        //             item.caracteristicas.push({'nombre': body.caracteristicas[i].nombre, 'valor': body.caracteristicas[i].valor});
+        //         }
+        //     }
+        // }
+        //
+        // if (body.imagenes && body.imagenes.length > 0) {
+        //     for (let i = 0; i < body.imagenes.length; i++) {
+        //         if (body.imagenes[i] && body.imagenes[i].url) {
+        //             item.imagenes.push({'url': body.imagenes[i].url});
+        //         }
+        //     }
+        // }
+
+        item.save(function (err) {
+            if (err) {
+                return next(new Error(err));
+            }
+
+            let result = JSON.stringify(item);
+            res.setHeader('Content-Type', 'application/json');
+            res.end(result);
+        });
+
+    }, function (err) {
+        return next(new Error(err));
     });
 };
 
 module.exports.updateProducto = function(req, res) {
-    var productoId = req.swagger.params.productoId.value;
-    var body = req.swagger.params.body.value;
+    let productoId = req.swagger.params.productoId.value;
+    let body = req.swagger.params.body.value;
+    let producto = null;
+    let categoria = null;
 
-    Producto.findById(productoId, function(err, item) {
-        if (err) {
-            return next(new Error(err));
+    if (body.categoria) {
+        categoria = (body.categoria._id ? body.categoria._id : body.categoria);
+    }
+
+    Promise.all([
+        Producto.findById(productoId).then(result => producto = result),
+        Categoria.findById(categoria).then(result => categoria = result),
+    ]).then(function () {
+
+        producto.nombre = body.nombre;
+        producto.descripcion = body.descripcion;
+
+        if (categoria) {
+            producto.categoria = categoria;
         }
 
-        item.nombre = body.nombre;
-        item.descripcion = body.descripcion;
-
         // save the bear
-        item.save(function(err) {
+        producto.save(function(err) {
             if (err) {
                 return next(new Error(err));
             }
@@ -150,6 +179,9 @@ module.exports.updateProducto = function(req, res) {
             res.setHeader('Content-Type', 'application/json');
             res.end(JSON.stringify('updated id: ' + productoId));
         });
+
+    }, function (err) {
+        return next(new Error(err));
     });
 };
 
@@ -169,10 +201,55 @@ module.exports.removeProducto = function(req, res) {
     });
 };
 
-module.exports.findAllProductoInStore = function(req, res) {
-    res.send(new Error('findAllProductoInStore not implemented!'));
-};
+module.exports.findAllProductoInEstablecimiento = function(req, res) {
+    let establecimientoId = (req.swagger.params.establecimientoId ? req.swagger.params.establecimientoId.value : null);
 
-module.exports.findOneProductoInStore = function(req, res) {
-    res.send(new Error('findOneProductoInStore not implemented!'));
+    if (!establecimientoId) {
+        return next(new Error('Establecimiento no existe'));
+    }
+
+    Inventario.find({establecimiento: establecimientoId})
+        .exec(function (err, data) {
+            let productos = [];
+
+            if (err) {
+                return next(new Error(err));
+            }
+
+            for (let item of data) {
+                if (item.producto) {
+                    productos.push(item.producto._id ? item.producto._id : item.producto);
+                }
+            }
+
+            Producto.find({'_id': {'$in': productos}})
+                .populate('categoria')
+                .exec(function (err2, data2) {
+                    let accept = accepts(req);
+                    let result = null;
+
+                    if (err2) {
+                        return next(new Error(err2));
+                    }
+
+                    switch(accept.type(['json', 'xml', 'html'])) {
+                        case 'xml':
+                            result = Producto.toXml(data2, false);
+                            res.setHeader('Content-Type', 'application/xml');
+                            res.end(result);
+                            break;
+                        case 'html':
+                            result = Producto.toHtml(data2, false);
+                            res.setHeader('Content-Type', 'text/html');
+                            res.end(result);
+                            break;
+                        default:
+                            // fallback to json
+                            result = JSON.stringify(data2);
+                            res.setHeader('Content-Type', 'application/json');
+                            res.end(result);
+                            break;
+                    }
+                });
+        });
 };

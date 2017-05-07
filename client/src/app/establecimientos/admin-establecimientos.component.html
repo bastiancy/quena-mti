@@ -26,15 +26,15 @@
         <tr>
           <th>id</th>
           <th>nombre</th>
-          <th>descripcion</th>
+          <th>pais</th>
           <th>opciones</th>
         </tr>
         </thead>
         <tbody>
           <tr *ngFor="let establecimiento of establecimientos">
-            <td>{{establecimiento.id}}</td>
+            <td>{{establecimiento._id}}</td>
             <td>{{establecimiento.nombre}}</td>
-            <td>{{establecimiento.descripcion}}</td>
+            <td>{{establecimiento.direccion.pais}}</td>
             <td>
               <button class="btn btn-default btn-sm" title="Editar" (click)="gotoDetail(establecimiento);"><i class="glyphicon glyphicon-pencil"></i></button>
               <button class="btn btn-danger btn-sm" title="Borrar" (click)="delete(establecimiento);"><i class="glyphicon glyphicon-trash"></i></button>

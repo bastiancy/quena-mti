@@ -2,10 +2,14 @@
 
   <div class="col-md-9" style="border-right: 1px solid #e3e3e3;">
     <div class="row">
-      <h3>Productos</h3>
+      <h3>Productos
+        <small class="text-muted" *ngIf="filtroCategoria"> - Filtrando por categoria "{{filtroCategoria.nombre}}"</small>
+        <small class="text-muted" *ngIf="filtroEstablecimiento"> - Filtrando por establecimiento "{{filtroEstablecimiento.nombre}}"</small>
+      </h3>
       <hr>
     </div>
     <div class="row">
+      <p class="text-muted" *ngIf="!productos || productos.length <= 0">No se encontraron productos.</p>
       <div class="col-sm-4 col-lg-4 col-md-4" *ngFor="let producto of productos">
         <div class="thumbnail">
           <div style="height: 200px; display: block; overflow: hidden;">
@@ -22,7 +26,7 @@
           </div>
           <div class="ratings">
             <br>
-            <p><i class="glyphicon glyphicon-tags"></i> &nbsp;Categoria ...</p>
+            <p *ngIf="producto.categoria"><i class="glyphicon glyphicon-tags"></i> &nbsp;{{producto.categoria.nombre}}</p>
           </div>
         </div>
       </div>
@@ -36,14 +40,6 @@
 
     <categorias-widget></categorias-widget>
 
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <i class="glyphicon glyphicon-shopping-cart"></i> &nbsp;Mi carro de compras
-      </div>
-      <div class="panel-body">
-        todo...
-      </div>
-    </div>
 
   </div>
 

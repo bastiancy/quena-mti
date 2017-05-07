@@ -33,7 +33,7 @@ export class AdminProductosComponent implements OnInit {
     }
 
     gotoDetail(producto: Producto): void {
-        this.router.navigate(['/admin/productos/detail', producto.id]);
+        this.router.navigate(['/admin/productos/detail', producto._id]);
     }
 
     add(nombre: string, descripcion: string): void {
@@ -50,7 +50,7 @@ export class AdminProductosComponent implements OnInit {
 
     delete(producto: Producto): void {
         this.productoService
-            .delete(producto.id)
+            .delete(producto._id)
             .then(() => {
                 this.productos = this.productos.filter(h => h !== producto);
                 if (this.selectedProducto === producto) { this.selectedProducto = null; }

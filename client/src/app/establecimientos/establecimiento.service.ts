@@ -6,7 +6,8 @@ import 'rxjs/add/operator/toPromise';
 import { Establecimiento } from './establecimiento';
 import { IAppConfig } from "../app-config.interface";
 import { APP_CONFIG } from "../app-config.constants";
-import {Inventario} from "../inventarios/inventario";
+import {Inventario} from "./inventario";
+import {Producto} from "../productos/producto";
 
 @Injectable()
 export class EstablecimientoService {
@@ -48,7 +49,7 @@ export class EstablecimientoService {
     }
 
     update(establecimiento: Establecimiento): Promise<Establecimiento> {
-        const url = `${this.establecimientosUrl}/${establecimiento.id}`;
+        const url = `${this.establecimientosUrl}/${establecimiento._id}`;
         return this.http
             .put(url, JSON.stringify(establecimiento), {headers: this.headers})
             .toPromise()
@@ -77,7 +78,7 @@ export class EstablecimientoService {
 
     getInventarioByEstablecimiento(establecimiento: Establecimiento): Promise<Inventario[]> {
 
-      return this.http.get(this.establecimientosUrl + '/' + establecimiento.id + '/inventario')
+      return this.http.get(this.establecimientosUrl + '/' + establecimiento._id + '/inventario')
         .toPromise()
         .then(response => response.json() as Inventario[])
         // .then(function (response): Producto[] {
@@ -86,6 +87,14 @@ export class EstablecimientoService {
         //     console.log(response.json().data);
         //     return response.json();
         // })
+        .catch(this.handleError);
+    }
+
+    getProductosEnStock(establecimiento: Establecimiento): Promise<Producto[]> {
+
+      return this.http.get(this.establecimientosUrl + '/' + establecimiento._id + '/productos')
+        .toPromise()
+        .then(response => response.json() as Producto[])
         .catch(this.handleError);
     }
 

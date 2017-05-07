@@ -27,6 +27,7 @@ import {AdminEstablecimientoDetailComponent} from "./establecimientos/admin-esta
 import {AdminProductosComponent} from "./productos/admin-productos.component";
 import {AdminProductoDetailComponent} from "./productos/admin-producto-detail.component";
 import {CategoriasWidgetComponent} from "./categorias/categorias-widget.component";
+import {ProductoSearchComponent} from "./productos/producto-search.component";
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import {CategoriasWidgetComponent} from "./categorias/categorias-widget.componen
     AdminProductoDetailComponent,
     ProductosComponent,
     ProductoDetailComponent,
+    ProductoSearchComponent,
     EstablecimientosComponent,
     CategoriasWidgetComponent
   ],

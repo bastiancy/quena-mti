@@ -7,7 +7,15 @@ const builder  = require('xmlbuilder');
 
 const EstablecimientoSchema   = new Schema({
     nombre: {type: String, required: true},
-    direccion: {type: mongoose.Schema.Types.ObjectId, ref: 'Direccion'}
+    direccion: {
+        pais: {type: String, required: true},
+        region: String,
+        ciudad: {type: String, required: true},
+        descripcion: {type: String, required: true},
+        zipcode: String,
+        geo_lat: Number,
+        geo_lon: Number
+    }
 });
 
 
@@ -17,7 +25,7 @@ EstablecimientoSchema.statics.toJson = function (data) {
             '_class': 'Establecimiento',
             'id': item._id,
             'nombre': item.nombre,
-            'direccion': (item.direccion ? {'_class': 'Direccion', 'id': item.direccion._id} : null)
+            'direccion': (item.direccion ? item.direccion : null)
         };
     };
 
@@ -44,7 +52,12 @@ EstablecimientoSchema.statics.toXml = function (data, fragment) {
                 'nombre': item.nombre,
                 'direccion': () => {
                     if (item.direccion)
-                        return {'@class': 'Direccion', '@id': item.direccion._id};
+                        return {
+                            '@class': 'Direccion',
+                            '@id': item.direccion._id,
+                            'pais': item.direccion.pais,
+                            'region': item.direccion.region,
+                        };
 
                     return null;
                 }
@@ -80,7 +93,7 @@ EstablecimientoSchema.statics.toHtml = function (data, fragment) {
             '<li><a href="/establecimientos/' + item._id + '">id: <span property="schema:identifier">' + item._id + '</span></a></li>'
             + '<li>nombre: <span property="schema:name">' + item.nombre + '</span></li>'
             + '<li>direccion: '
-            + (item.direccion ? '<a href="/direccion/' + item.direccion._id + '">_id: ' + item.direccion._id + '</a>' : 'null')
+            + (item.direccion ? 'pais: ' + item.direccion.pais + ', region: ' + item.direccion.region : 'null')
             + '</li></ul>'
             ;
     };

@@ -27,7 +27,7 @@ module.exports.findAllCategoria = function(req, res, next) {
                 break;
             default:
                 // fallback to json
-                result = Categoria.toJson(data);
+                result = JSON.stringify(data);
                 res.setHeader('Content-Type', 'application/json');
                 res.end(result);
                 break;
@@ -59,7 +59,7 @@ module.exports.findOneCategoria = function(req, res, next) {
                 break;
             default:
                 // fallback to json
-                result = Categoria.toJson(data);
+                result = JSON.stringify(data);
                 res.setHeader('Content-Type', 'application/json');
                 res.end(result);
                 break;
@@ -79,7 +79,7 @@ module.exports.addCategoria = function(req, res, next) {
             return next(new Error(err));
         }
 
-        let result = Categoria.toJson(item);
+        let result = JSON.stringify(item);
         res.setHeader('Content-Type', 'application/json');
         res.end(result);
     });

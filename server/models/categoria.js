@@ -11,28 +11,35 @@ const CategoriaSchema   = new Schema({
     categoriaPadre: {type: mongoose.Schema.Types.ObjectId, ref: 'Categoria'}
 });
 
-CategoriaSchema.statics.toJson = function (data) {
-    let def = function(item) {
-        return {
-            '_class': 'Categoria',
-            'id': item._id,
-            'nombre': item.nombre,
-            'descripcion': item.descripcion,
-            'categoriaPadre': (item.categoriaPadre ? {'_class': 'Categoria', 'id': item.categoriaPadre} : null)
-        };
+
+CategoriaSchema.statics.serialize = function (data) {
+    let item = {
+        _class: 'Categoria',
+        id: data._id,
+        nombre: data.nombre,
+        descripcion: data.descripcion,
+        categoriaPadre: null,
     };
 
+    if (data.categoriaPadre) {
+        item.categoriaPadre = CategoriaSchema.serialize(data.categoriaPadre);
+    }
+
+    return item;
+};
+
+CategoriaSchema.statics.toJson = function (data) {
     if (data instanceof Array) {
         let objs = [];
 
         for (let item of data) {
-            objs.push(def(item));
+            objs.push(CategoriaSchema.serialize(item));
         }
 
         return JSON.stringify(objs);
     }
     else {
-        return JSON.stringify(def(data));
+        return JSON.stringify(CategoriaSchema.serialize(data));
     }
 };
 

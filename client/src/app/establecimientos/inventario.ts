@@ -1,9 +1,9 @@
 import {Producto} from "../productos/producto";
-import {Establecimiento} from "../establecimientos/establecimiento";
+import {Establecimiento} from "./establecimiento";
 
 export class Inventario {
     id: string;
     producto: Producto;
     establecimiento: Establecimiento;
-    precio: [{moneda: string, valor: string}];
+    precio: {moneda: string, valor: string};
 }

@@ -2,9 +2,9 @@
   "name": "quena-store",
   "version": "0.1.0",
   "description": "Tienda online para venta de instrumentos musicales,   para la tarea del MTI ",
-  "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node server.js",
+    "prestart": "npm install",
     "test": "mocha --recursive"
   },
   "engines": {

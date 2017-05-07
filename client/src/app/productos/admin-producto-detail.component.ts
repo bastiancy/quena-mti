@@ -5,6 +5,8 @@ import 'rxjs/add/operator/switchMap';
 
 import { Producto } from './producto';
 import { ProductoService } from './producto.service';
+import {Categoria} from "../categorias/categoria";
+import {CategoriaService} from "../categorias/categoria.service";
 
 @Component({
     selector: 'producto-detail',
@@ -12,9 +14,11 @@ import { ProductoService } from './producto.service';
 })
 export class AdminProductoDetailComponent implements OnInit {
     producto: Producto;
+    categorias: Categoria[];
 
     constructor(
         private productoService: ProductoService,
+        private categoriaService: CategoriaService,
         private route: ActivatedRoute,
         private location: Location
     ) {}
@@ -23,6 +27,8 @@ export class AdminProductoDetailComponent implements OnInit {
         this.route.params
             .switchMap((params: Params) => this.productoService.getProducto(params['id']))
             .subscribe(producto => this.producto = producto);
+
+        this.categoriaService.getCategorias().then(items => this.categorias = items);
     }
 
     goBack(): void {

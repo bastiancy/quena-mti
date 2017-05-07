@@ -34,7 +34,7 @@ export class EstablecimientosComponent implements OnInit {
     }
 
     gotoDetail(establecimiento: Establecimiento): void {
-        this.router.navigate(['/establecimientos/detail', establecimiento.id]);
+        this.router.navigate(['/establecimientos/detail', establecimiento._id]);
     }
 
     getMapsUrl(establecimiento: Establecimiento): string {
@@ -55,11 +55,15 @@ export class EstablecimientosComponent implements OnInit {
 
     delete(establecimiento: Establecimiento): void {
         this.establecimientoService
-            .delete(establecimiento.id)
+            .delete(establecimiento._id)
             .then(() => {
                 this.establecimientos = this.establecimientos.filter(h => h !== establecimiento);
                 if (this.selectedEstablecimiento === establecimiento) { this.selectedEstablecimiento = null; }
             });
+    }
+
+    goToProductos(est: Establecimiento): void {
+      this.router.navigate(['/productos', {'establecimiento': est._id}]);
     }
 }
 

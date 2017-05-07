@@ -29,7 +29,7 @@ export class AdminCategoriasComponent implements OnInit {
     }
 
     gotoDetail(categoria: Categoria): void {
-        this.router.navigate(['/admin/categorias/detail', categoria.id]);
+        this.router.navigate(['/admin/categorias/detail', categoria._id]);
     }
 
     add(nombre: string, descripcion: string): void {
@@ -46,7 +46,7 @@ export class AdminCategoriasComponent implements OnInit {
 
     delete(categoria: Categoria): void {
         this.categoriaService
-            .delete(categoria.id)
+            .delete(categoria._id)
             .then(() => {
                 this.categorias = this.categorias.filter(h => h !== categoria);
                 if (this.selectedCategoria === categoria) { this.selectedCategoria = null; }

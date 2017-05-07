@@ -36,7 +36,7 @@ module.exports.findAllInventarioInEstablecimiento = function(req, res, next) {
                     break;
                 default:
                     // fallback to json
-                    result = Inventario.toJson(data);
+                    result = JSON.stringify(data);
                     res.setHeader('Content-Type', 'application/json');
                     res.end(result);
                     break;

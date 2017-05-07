@@ -8,7 +8,7 @@ import { Categoria } from './categoria';
 import { CategoriaService } from './categoria.service';
 import { Producto } from "../productos/producto";
 import { ProductoService } from "../productos/producto.service";
-import { Inventario } from "../inventarios/inventario";
+import { Inventario } from "../establecimientos/inventario";
 
 @Component({
     selector: 'categorias-widget',
@@ -30,7 +30,7 @@ export class CategoriasWidgetComponent implements OnInit {
   }
 
   goToProductos(cat: Categoria): void {
-    this.router.navigate(['/productos', {'categoria': cat.id}]);
+    this.router.navigate(['/productos', {'categoria': cat._id}]);
   }
 
 }

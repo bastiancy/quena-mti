@@ -6,7 +6,8 @@ const jstoxml = require('../helpers/js2xml');
 const Establecimiento = require('../models/establecimiento');
 
 module.exports.findAllEstablecimiento = function(req, res, next) {
-    Establecimiento.find(function (err, data) {
+    Establecimiento.find()
+    .exec(function (err, data) {
         let accept = accepts(req);
         let result = null;
 
@@ -27,7 +28,7 @@ module.exports.findAllEstablecimiento = function(req, res, next) {
                 break;
             default:
                 // fallback to json
-                result = Establecimiento.toJson(data);
+                result = JSON.stringify(data);
                 res.setHeader('Content-Type', 'application/json');
                 res.end(result);
                 break;
@@ -38,7 +39,8 @@ module.exports.findAllEstablecimiento = function(req, res, next) {
 module.exports.findOneEstablecimiento = function(req, res, next) {
     let establecimientoId = req.swagger.params.establecimientoId.value;
 
-    Establecimiento.findById(establecimientoId, function(err, data) {
+    Establecimiento.findById(establecimientoId)
+    .exec(function (err, data) {
         let accept = accepts(req);
         let result = null;
 
@@ -59,7 +61,7 @@ module.exports.findOneEstablecimiento = function(req, res, next) {
                 break;
             default:
                 // fallback to json
-                result = Establecimiento.toJson(data);
+                result = JSON.stringify(data);
                 res.setHeader('Content-Type', 'application/json');
                 res.end(result);
                 break;
@@ -72,13 +74,15 @@ module.exports.addEstablecimiento = function(req, res, next) {
 
     let item = new Establecimiento();
     item.nombre = body.nombre;
+    item.descripcion = body.descripcion;
+    item.direccion = body.direccion;
 
     item.save(function (err) {
         if (err) {
             return next(new Error(err));
         }
 
-        let result = Establecimiento.toJson(item);
+        let result = JSON.stringify(item);
         res.setHeader('Content-Type', 'application/json');
         res.end(result);
     });
@@ -95,6 +99,7 @@ module.exports.updateEstablecimiento = function(req, res) {
 
         item.nombre = body.nombre;
         item.descripcion = body.descripcion;
+        item.direccion = body.direccion;
 
         // save the bear
         item.save(function(err) {
@@ -118,7 +123,7 @@ module.exports.removeEstablecimiento = function(req, res) {
             return next(new Error(err));
         }
 
-        let result = Establecimiento.toJson(item);
+        let result = JSON.stringify(item);
         res.setHeader('Content-Type', 'application/json');
         res.end(result);
     });

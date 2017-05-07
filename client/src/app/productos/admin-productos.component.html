@@ -26,15 +26,15 @@
         <tr>
           <th>id</th>
           <th>nombre</th>
-          <th>descripcion</th>
+          <th>categoria</th>
           <th>opciones</th>
         </tr>
         </thead>
         <tbody>
           <tr *ngFor="let producto of productos">
-            <td>{{producto.id}}</td>
+            <td>{{producto._id}}</td>
             <td>{{producto.nombre}}</td>
-            <td>{{producto.descripcion}}</td>
+            <td>{{producto.categoria.nombre}}</td>
             <td>
               <button class="btn btn-default btn-sm" title="Editar" (click)="gotoDetail(producto);"><i class="glyphicon glyphicon-pencil"></i></button>
               <button class="btn btn-danger btn-sm" title="Borrar" (click)="delete(producto);"><i class="glyphicon glyphicon-trash"></i></button>

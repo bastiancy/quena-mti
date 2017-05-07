@@ -33,7 +33,7 @@ export class AdminEstablecimientosComponent implements OnInit {
     }
 
     gotoDetail(establecimiento: Establecimiento): void {
-        this.router.navigate(['/admin/establecimientos/detail', establecimiento.id]);
+        this.router.navigate(['/admin/establecimientos/detail', establecimiento._id]);
     }
 
     add(nombre: string, descripcion: string): void {
@@ -50,7 +50,7 @@ export class AdminEstablecimientosComponent implements OnInit {
 
     delete(establecimiento: Establecimiento): void {
         this.establecimientoService
-            .delete(establecimiento.id)
+            .delete(establecimiento._id)
             .then(() => {
                 this.establecimientos = this.establecimientos.filter(h => h !== establecimiento);
                 if (this.selectedEstablecimiento === establecimiento) { this.selectedEstablecimiento = null; }

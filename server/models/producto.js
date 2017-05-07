@@ -4,6 +4,7 @@ const util     = require('util');
 const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
 const builder  = require('xmlbuilder');
+const Categoria = require('./categoria');
 
 const ProductoSchema   = new Schema({
     codigo: {tipo: String, valor: String},
@@ -12,39 +13,44 @@ const ProductoSchema   = new Schema({
     modelo: String,
     descripcion: String,
     origen: String,
-    categorias: [{type: mongoose.Schema.Types.ObjectId, ref: 'Categoria'}],
+    categoria: {type: mongoose.Schema.Types.ObjectId, ref: 'Categoria'},
     caracteristicas: [{nombre: String, valor: String}],
     imagenes: [{url: String}]
 });
 
-ProductoSchema.statics.toJson = function (data) {
-    let def = function(item) {
-        return {
-            '_class': 'Producto',
-            'id': item._id,
-            'codigo': (item.codigo ? {'tipo': item.codigo.tipo, 'valor': item.codigo.valor} : null),
-            'nombre': item.nombre,
-            'marca': item.marca,
-            'modelo': item.modelo,
-            'descripcion': item.descripcion,
-            'origen': item.origen,
-            'categorias': null,
-            'caracteristicas': item.caracteristicas,
-            'imagenes': item.imagenes,
-        };
+ProductoSchema.statics.serialize = function (data) {
+    let item = {
+        _class: 'Producto',
+        id: data._id,
+        categoria: null,
+        nombre: data.nombre,
+        marca: data.marca,
+        modelo: data.modelo,
+        descripcion: data.descripcion,
+        origen: data.origen,
+        caracteristicas: data.caracteristicas,
+        imagenes: data.imagenes
     };
 
+    if (data.categoria) {
+        item.categoria = Categoria.serialize(data.categoria);
+    }
+
+    return item;
+};
+
+ProductoSchema.statics.toJson = function (data) {
     if (data instanceof Array) {
         let objs = [];
 
         for (let item of data) {
-            objs.push(def(item));
+            objs.push(ProductoSchema.statics.serialize(item));
         }
 
         return JSON.stringify(objs);
     }
     else {
-        return JSON.stringify(def(data));
+        return JSON.stringify(ProductoSchema.statics.serialize(data));
     }
 };
 

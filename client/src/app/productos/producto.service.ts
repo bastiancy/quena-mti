@@ -1,12 +1,14 @@
 import { Injectable, Inject }    from '@angular/core';
 import {Headers, Http, URLSearchParams} from '@angular/http';
 
+import { Observable }     from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
 import { Producto } from './producto';
 import { IAppConfig } from "../app-config.interface";
 import { APP_CONFIG } from "../app-config.constants";
-import {Inventario} from "../inventarios/inventario";
+import { Inventario } from "../establecimientos/inventario";
 
 @Injectable()
 export class ProductoService {
@@ -17,8 +19,16 @@ export class ProductoService {
         private http: Http,
         @Inject( APP_CONFIG ) private config: IAppConfig
     ) {
-
         this.productosUrl = this.config.API_ENDPOINT + '/productos';
+    }
+
+    search(term: string): Observable<Producto[]> {
+      return this.http
+        .get(this.productosUrl + `?nombre=${term}`)
+        .map(response => {
+          console.log(response);
+          return response.json() as Producto[]
+        });
     }
 
     getProductos(): Promise<Producto[]> {
@@ -63,7 +73,7 @@ export class ProductoService {
     }
 
     update(producto: Producto): Promise<Producto> {
-        const url = `${this.productosUrl}/${producto.id}`;
+        const url = `${this.productosUrl}/${producto._id}`;
         return this.http
             .put(url, JSON.stringify(producto), {headers: this.headers})
             .toPromise()
