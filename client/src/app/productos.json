@@ -1,0 +1,142 @@
+[
+  {
+    "_id": "string",
+    "codigo_tipo": "string",
+    "codigo_valor": "string",
+    "nombre": "Quena",
+    "marca": "Bolivia instruments",
+    "modelo": "Basica 1",
+    "descripcion": "La quena (del quechua qina) es un instrumento de viento de bisel, usado de modo tradicional por los habitantes de los Andes centrales La quena es tradicionalmente de caña o madera y tiene un total de siete agujeros, seis al frente y uno atrás, para el pulgar. En la actualidad es (junto al sicu y el charango) uno de los instrumentos típicos de los conjuntos folclóricos de música andina, encontrándose su uso también en la música de fusión, etno, música nueva era, etc.",
+    "origen": "zona del Altiplano andino, en América del Sur",
+    "categoria": {
+      "_id": "590f9bfae7fe09009866f3aa",
+      "descripcion": "Instrumentos que emiten sonidos con el viento.",
+      "nombre": "Vientos"
+    },
+    "caracteristicas": [
+      {
+        "nombre": "Material",
+        "valor": "Fabricada de caña, cortada en su entrenudo."
+      },
+      {
+        "nombre": "Color",
+        "valor": "Marron."
+      }
+    ],
+    "imagenes": [
+      {
+        "url": "http://www.charangosforsale.com/image/cache/catalog/quenas/QUN-002-500x500.jpg"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/b/be/Quena01.jpg"
+      },
+      {
+        "url": "https://i.ytimg.com/vi/PltKPr6v-Ws/maxresdefault.jpg"
+      }
+    ]
+  },
+  {
+    "_id": "string",
+    "codigo_tipo": "string",
+    "codigo_valor": "string",
+    "nombre": "Zampoña",
+    "marca": "Bolivia instruments",
+    "modelo": "Basica 1",
+    "descripcion": "La zampoña es un instrumento de viento compuesto de varios tubos ahuecados por un extremo y cerrados por el otro, dispuestos en forma vertical en una o dos hileras, todos de distintas longitudes y diámetros, lo que determina el sonido de cada uno al ser soplado por el ejecutor.",
+    "origen": "Altiplano andino, en América del Sur",
+    "categoria": {
+      "_id": "590f9bfae7fe09009866f3aa",
+      "descripcion": "Instrumentos que emiten sonidos con el viento.",
+      "nombre": "Vientos"
+    },
+    "caracteristicas": [
+      {
+        "nombre": "Material",
+        "valor": "Fabricada de caña, cortada en su entrenudo."
+      },
+      {
+        "nombre": "Color",
+        "valor": "Marron."
+      }
+    ],
+    "imagenes": [
+      {
+        "url": "http://mla-s2-p.mlstatic.com/sicus-aju-instrumentos-zampona-doble-grande-13-tubos-envios-13658-MLA3004362646_082012-O.jpg"
+      },
+      {
+        "url": "http://www.boliviamall.com/images/denanda010_M.jpg"
+      },
+      {
+        "url": "http://www.boliviamall.com/images/denanda017_M.jpg"
+      }
+    ]
+  },
+  {
+    "_id": "string",
+    "codigo_tipo": "string",
+    "codigo_valor": "string",
+    "nombre": "Charango",
+    "marca": "Bolivia instruments",
+    "modelo": "Basica 1",
+    "descripcion": "El charango es un instrumento de cuerda principalmente usado en la región de la cordillera de los Andes, con origen en la región del altiplano andino. Posee cinco cuerdas dobles, aunque hay variaciones con menos o más cuerdas, pero casi siempre en cinco órdenes o juegos.",
+    "origen": "Altiplano andino, en América del Sur",
+    "categoria": {
+      "_id": "590f9c1ee7fe09009866f3ab",
+      "descripcion": "Instrumentos que emiten sonidos cuando vibran las cuerdas.",
+      "nombre": "Cuerdas"
+    },
+    "caracteristicas": [
+      {
+        "nombre": "Material",
+        "valor": "El charango puede tener varios tipos de caja de resonancia: la de armadillo, la de madera ahuecada o \"vaciado\" y la de madera laminada."
+      },
+      {
+        "nombre": "Cuerdas",
+        "valor": "El charango cuenta con cinco pares de cuerdas."
+      }
+    ],
+    "imagenes": [
+      {
+        "url": "https://makingmulticulturalmusic.files.wordpress.com/2013/03/charango-full-color-image-e1363116667672.jpg"
+      },
+      {
+        "url": "http://www.sangitamiya.is/wp-content/uploads/2010/04/Bolivian-Charango-Standard-with-Bag.jpg"
+      },
+      {
+        "url": "http://www.tigomusic.bo/sites/music.bo/files/styles/cont395x395/public/news/images/Charango%20imagen.jpg?itok=JzAFGe0l"
+      }
+    ]
+  },
+  {
+    "_id": "string",
+    "codigo_tipo": "string",
+    "codigo_valor": "string",
+    "nombre": "Gaita",
+    "marca": "España instruments",
+    "modelo": "Basica 1",
+    "descripcion": "La gaita o cornamusa1 es un instrumento de viento. Para obtener el sonido el intérprete almacena aire en un odre o saco soplando a través de un tubo o bien accionando fuelles con un brazo, para posteriormente presionar el odre haciendo que el aire salga por otro tubo dotado de orificios donde se ejecuta con los dedos la melodía.",
+    "origen": "los pueblos babilonios, hebreos, fenicios, romanos y celtas.",
+    "categoria": {
+      "_id": "590f9bfae7fe09009866f3aa",
+      "descripcion": "Instrumentos que emiten sonidos con el viento.",
+      "nombre": "Vientos"
+    },
+    "caracteristicas": [
+      {
+        "nombre": "Material",
+        "valor": "Odre o saco de cuero, y punteros de madera."
+      }
+    ],
+    "imagenes": [
+      {
+        "url": "http://img.aws.ehowcdn.com/intl-620/ds-photo/getty/article/117/182/86804861.jpg"
+      },
+      {
+        "url": "https://images-na.ssl-images-amazon.com/images/I/415d0mAjcsL.jpg"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Gaita_galega.jpg"
+      }
+    ]
+  }
+]

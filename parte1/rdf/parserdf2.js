@@ -9,13 +9,14 @@ var simpleXml = fs.readFileSync(__dirname + '/test3.rdf').toString();
 var parser = new RdfXmlParser();
 
 // forward the JSON-LD example string to the parser
-var quadStream = parser.parse(simpleXml);
+var quadStream = parser.process(simpleXml);
 
 // create the N-Triples serializer instance
 var serializer = new NTriplesSerializer();
 
 // import the parser stream into the serializer (reverse pipe)
-var nTriplesStream = serializer.parse(quadStream);
+var nTriplesStream = serializer.serialize(quadStream);
 
+console.log(nTriplesStream);
 // pipe the N-Triples stream to stdout
-nTriplesStream.pipe(process.stdout);
+//nTriplesStream.pipe(process.stdout);

@@ -34,10 +34,15 @@ module.exports.findAllProducto = function(req, res, next) {
                 return next(new Error(err));
             }
 
-            switch(accept.type(['json', 'xml', 'html'])) {
+            switch(accept.type(['json', 'xml', 'html', 'application/rdf+xml'])) {
                 case 'xml':
                     result = Producto.toXml(data, false);
                     res.setHeader('Content-Type', 'application/xml');
+                    res.end(result);
+                    break;
+                case 'application/rdf+xml':
+                    result = Producto.toRdf(data, false);
+                    res.setHeader('Content-Type', 'application/rdf+xml');
                     res.end(result);
                     break;
                 case 'html':

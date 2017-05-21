@@ -54,20 +54,71 @@ ProductoSchema.statics.toJson = function (data) {
     }
 };
 
+ProductoSchema.statics.toRdf = function (data, fragment) {
+    let def = function(item) {
+        return {
+            'sch:Product': {
+                'rdf:Description': {
+                    '@rdf:about': 'http://quena-mti.bastian.info/rdf/producto/' + item._id.toString(),
+                    'sch:productID': item._id.toString(),
+                    'sch:name': item.nombre,
+                    'sch:brand': item.marca,
+                    'sch:model': item.modelo,
+                    'sch:description': item.descripcion,
+                }
+            }
+        };
+    };
+
+    let root = builder.create('rdf:RDF', {});
+    root.att('xmlns:ex', 'http://www.example.org/store');
+    root.att('xmlns:rdf', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#');
+    root.att('xmlns:rdfs', 'http://www.w3.org/2000/01/rdf-schema#');
+    root.att('xmlns:sch', 'http://schema.org/');
+
+    let ele = root.ele({
+        'rdf:Description': {
+            '@rdf:about': 'http://quena-mti.bastian.info/rdf',
+        }});
+
+    if (data instanceof Array) {
+
+        for (let item of data) {
+            ele.ele(def(item));
+        }
+
+        if (fragment)
+            return root;
+
+        return root.end();
+    }
+    else {
+        ele.ele(def(data));
+
+        if (fragment)
+            return root;
+
+        return root.end();
+    }
+};
+
 ProductoSchema.statics.toXml = function (data, fragment) {
     let def = function(item) {
         return {
-            'categoria': {
+            'producto': {
                 '@class': 'Producto',
                 '@id': item._id,
                 'nombre': item.nombre,
                 'descripcion': item.descripcion,
+                'categoria': function () {
+                    return item.categoria ? Categoria.toXml(item.categoria, true) : null;
+                }
             }
         };
     };
 
     if (data instanceof Array) {
-        let root = builder.create('categorias');
+        let root = builder.create('producto');
 
         for (let item of data) {
             root.ele(def(item));
@@ -94,6 +145,7 @@ ProductoSchema.statics.toHtml = function (data, fragment) {
             '<li><a href="/productos/' + item._id + '">id: <span property="schema:identifier">' + item._id + '</span></a></li>'
             + '<li>nombre: <span property="schema:name">' + item.nombre + '</span></li>'
             + '<li>descripcion: <span property="schema:description">' + item.descripcion + '</span></li>'
+            + (item.categoria ? '<li>' + Categoria.toHtml(item.categoria, true) + '</li>' : '')
             + '</li></ul>'
             ;
     };

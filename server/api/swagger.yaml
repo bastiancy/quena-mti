@@ -7,7 +7,8 @@ info:
   title: Quena Store
   contact:
     name: bastian.carvajal@sansano.usm.cl
-host: api.quenamti.bastianc.info
+#host: api.quenamti.bastianc.info
+host: localhost:5000
 basePath: /
 schemes:
   - http
@@ -25,6 +26,7 @@ paths:
         - application/json
         - application/xml
         - text/html
+        - application/rdf+xml
       parameters:
         - in: query
           name: categoria
